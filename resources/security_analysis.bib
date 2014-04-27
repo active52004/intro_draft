@@ -1,0 +1,141 @@
+@inproceedings{symbolic-kerberos,
+abstract = {We present a computational analysis of basic Kerberos and Kerberos with public-key authentication (PKINIT) in which we consider authentication and key secrecy properties. Our proofs rely on the Dolev-Yao style model of Backes, Pfitzmann and Waidner, which allows for mapping results obtained symbolically within this model to cryptographically sound proofs if certain assumptions are met. This is the most complex fragment of an industrial protocol that has yet been verified at the computational level. Considering a recently fixed version of PKINIT, we extend symbolic correctness results we previously attained in the Dolev-Yao model to cryptographically sound results in the computational model},
+address = {Berlin, Germany},
+annote = {cryptographically sound security proofs;public-key Kerberos;public-key authentication;symbolic correctness;},
+author = {Backes, M and Cervesato, I and Jaggard, A D and Scedrov, A and Tsay, J K},
+booktitle = {Computer Security - ESORICS 2006. 11TH European Symposium on Research in Computer Security (Lecture Notes in Computer Science Vol. 4189)},
+file = {:home/adele/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Backes et al. - Unknown - Cryptographically sound security proofs for basic and public-key Kerberos.pdf:pdf},
+keywords = {public key cryptography,symbol manipulation},
+pages = {362 -- 83},
+title = {{Cryptographically sound security proofs for basic and public-key Kerberos}},
+year = {2006}
+}
+@inproceedings{computational-kerberos,
+abstract = {Kerberos is a widely-deployed network authentication protocol that is being considered for standardization. Many works have analyzed its security, identifying flaws and often suggesting fixes, thus helping the protocol's evolution. Several recent results present successful formal-methods-based verification of a significant portion of the current version 5, and some even imply security in the computational setting. For these results to hold, encryption in Kerberos should satisfy strong cryptographic security notions. However, neither currently deployed as part of Kerberos encryption schemes nor their proposed revisions are known to provably satisfy such notions. We take a close look at Kerberos' encryption and confirm that most of the options in the current version provably provide privacy and authenticity, some with slight modification that we suggest. Our results complement the formal-methods-based analysis of Kerberos that justifies its current design. \&copy; 2007 IEEE.},
+address = {Berkeley, CA, United states},
+annote = {Computational setting;Security analysis;},
+author = {Boldyreva, Alexandra and Kumar, Virendra},
+booktitle = {Proceedings - IEEE Symposium on Security and Privacy},
+file = {:home/adele/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Boldyreva, Kumar - 2007 - Provable-security analysis of authenticated encryption in Kerberos(2).pdf:pdf},
+issn = {10816011},
+keywords = {Authentication,Computational methods,Data privacy,Network protocols,Standardization,Verification},
+pages = {92--97},
+title = {{Provable-security analysis of authenticated encryption in Kerberos}},
+url = {http://dx.doi.org/10.1109/SP.2007.19},
+year = {2007}
+}
+@misc{code-game,
+annote = {$\backslash$url\{http://eprint.iacr.org/\}},
+author = {Bellare, Mihir and Rogaway, Phillip},
+booktitle = {Cryptology ePrint Archive, Report 2004/331},
+file = {:home/adele/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Rogaway - 2006 - Code-Based Game-Playing Proofs.pdf:pdf},
+howpublished = {Cryptology ePrint Archive, Report 2004/331},
+title = {{Code-Based Game-Playing Proofs and the Security of Triple Encryption}},
+year = {2004}
+}
+@inproceedings{symbolic-mac,
+abstract = {Proofs of security protocols typically employ simple abstractions of cryptographic operations, so that large parts of such proofs are independent of cryptographic details. The typical abstraction is the Dolev-Yao model, which treats cryptographic operations as a specific term algebra. However, there is no cryptographic semantics, i.e., no theorem that says what a proof with the Dolev-Yao abstraction implies for the real protocol, even if provably secure cryptographic primitives are used. Recently we introduced an extension to the Dolev-Yao model for which such a cryptographic semantics exists, i.e., where security is preserved if the abstractions are instantiated with provably secure cryptographic primitives. Only asymmetric operations (digital signatures and public-key encryption) are considered so far. Here we extend this model to include a first symmetric primitive, message authentication, and prove that the extended model still has all desired properties. The proof is a combination of a probabilistic, imperfect bisimulation with cryptographic reductions and static information-flow analysis. Considering symmetric primitives adds a major complication to the original model: we must deal with the exchange of secret keys, which might happen any time before or after the keys have been used for the first time. Without symmetric primitives only public keys need to be exchanged},
+address = {Berlin, Germany},
+annote = {symmetric authentication;cryptographic library;security protocols;cryptographic operations;Dolev-Yao model;cryptographic semantics;proofs;Dolev-Yao abstraction;digital signatures;public-key encryption;message authentication;cryptographic reductions;static information-flow analysis;secret keys;},
+author = {Backes, M and Pfitzmann, B and Waidner, M},
+booktitle = {Computer Security - ESORICS 2003. 8th European Symposium on Research in Computer Security. Proceedings (Lecture Notes in Comput. Sci. Vol.2808)},
+file = {:home/adele/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Backes, Pfitzmann, Waidner - 2003 - Symmetric authentication within a simulatable cryptographic library.pdf:pdf},
+keywords = {authorisation,message authentication,protocols,public key cryptography},
+pages = {271 -- 90},
+title = {{Symmetric authentication within a simulatable cryptographic library}},
+year = {2003}
+}
+@article{symbolic-survey,
+abstract = {Since the 1980s, two approaches have been developed for analyzing security protocols. One of the approaches relies on a computational model that considers issues of complexity and probability. This approach captures a strong notion of security, guaranteed against all probabilistic polynomial-time attacks. The other approach relies on a symbolic model of protocol executions in which cryptographic primitives are treated as black boxes. Since the seminal work of Dolev and Yao, it has been realized that this latter approach enables significantly simpler and often automated proofs. However, the guarantees that it offers with respect to the more detailed computational models have been quite unclear. For more than 20 years the two approaches have coexisted but evolved mostly independently. Recently, significant research efforts attempt to develop paradigms for cryptographic systems analysis that combines the best of both worlds. There are two broad directions that have been followed. Computational soundness aims to establish sufficient conditions under which results obtained using symbolic models imply security under computational models. The direct approach aims to apply the principles and the techniques developed in the context of symbolic models directly to computational ones. In this paper we survey existing results along both of these directions. Our goal is to provide a rather complete summary that could act as a quick reference for researchers whowant to contribute to the field, want to make use of existing results, or just want to get a better picture of what results already exist. \&copy; Springer Science+Business Media B.V. 2010.},
+address = {Van Godewijckstraat 30, Dordrecht, 3311 GZ, Netherlands},
+annote = {Automated proofs;Black boxes;Computational analysis;Computational model;Computational soundness;Cryptographic primitives;Cryptographic systems;Direct approach;Polynomial-time attacks;Protocol execution;Research efforts;Security protoco;Security protocols;Sufficient conditions;Symbolic methods;Symbolic model;},
+author = {Cortier, Veronique and Kremer, Steve and Warinschi, Bogdan},
+file = {:home/adele/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Cortier, Kremer, Warinschi - 2011 - A survey of symbolic methods in computational analysis of cryptographic systems.pdf:pdf},
+issn = {01687433},
+journal = {Journal of Automated Reasoning},
+keywords = {Computational methods,Network security,Surveys,Systems analysis},
+number = {3-4},
+pages = {225--259},
+title = {{A survey of symbolic methods in computational analysis of cryptographic systems}},
+url = {http://dx.doi.org/10.1007/s10817-010-9187-9},
+volume = {46},
+year = {2011}
+}
+@inproceedings{Dolev-Yao,
+abstract = {Concerns mainly protocols for transmitting a secret plaintext M between two users. To give an idea of the way a saboteur may break the system, the authors consider a few examples},
+address = {New York, NY, USA},
+annote = {security;public key protocols;secret plaintext;
+        
+formal methods},
+author = {Dolev, D and Yao, A C},
+booktitle = {22nd Annual Symposium on Foundations of Computer Science},
+file = {:home/adele/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Dolev, Yao - 1981 - On the security of public key protocols.pdf:pdf},
+keywords = {computer networks,data communication systems,formal languages,protocols,security of data},
+pages = {350 -- 7},
+title = {{On the security of public key protocols}},
+year = {1981}
+}
+
+@article{goldwasser1984probabilistic,
+  title={Probabilistic encryption},
+  author={Goldwasser, Shafi and Micali, Silvio},
+  journal={Journal of computer and system sciences},
+  volume={28},
+  number={2},
+  pages={270--299},
+  year={1984},
+  publisher={Elsevier}
+}
+
+@inproceedings{yao1982theory,
+  title={Theory and application of trapdoor functions},
+  author={Yao, Andrew C},
+  booktitle={Foundations of Computer Science, 1982. SFCS'08. 23rd Annual Symposium on},
+  pages={80--91},
+  year={1982},
+  organization={IEEE}
+}
+
+@inproceedings{kilian1996protect,
+  title={How to protect DES against exhaustive key search},
+  author={Kilian, Joe and Rogaway, Phillip},
+  booktitle={Advances in Cryptology—CRYPTO’96},
+  pages={252--267},
+  year={1996},
+  organization={Springer}
+}
+
+@inproceedings{bellare1990new,
+  title={New paradigms for digital signatures and message authentication based on non-interactive zero knowledge proofs},
+  author={Bellare, Mihir and Goldwasser, Shafi},
+  booktitle={Advances in Cryptology—CRYPTO’89 Proceedings},
+  pages={194--211},
+  year={1990},
+  organization={Springer}
+}
+
+@inproceedings{shoup2000using,
+  title={Using hash functions as a hedge against chosen ciphertext attack},
+  author={Shoup, Victor},
+  booktitle={Advances in Cryptology—EUROCRYPT 2000},
+  pages={275--288},
+  year={2000},
+  organization={Springer}
+}
+@incollection{yasuda2011new,
+  title={A new variant of PMAC: beyond the birthday bound},
+  author={Yasuda, Kan},
+  booktitle={Advances in Cryptology--CRYPTO 2011},
+  pages={596--609},
+  year={2011},
+  publisher={Springer}
+}
+
+@incollection{blanchet2006automated,
+  title={Automated security proofs with sequences of games},
+  author={Blanchet, Bruno and Pointcheval, David},
+  booktitle={Advances in Cryptology-CRYPTO 2006},
+  pages={537--554},
+  year={2006},
+  publisher={Springer}
+}

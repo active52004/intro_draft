@@ -1,5 +1,21 @@
 \begin{thebibliography}{10}
 
+\bibitem{symbolic-kerberos}
+M~Backes, I~Cervesato, A~D Jaggard, A~Scedrov, and J~K Tsay.
+\newblock {Cryptographically sound security proofs for basic and public-key
+  Kerberos}.
+\newblock In {\em Computer Security - ESORICS 2006. 11TH European Symposium on
+  Research in Computer Security (Lecture Notes in Computer Science Vol. 4189)},
+  pages 362 -- 83, Berlin, Germany, 2006.
+
+\bibitem{symbolic-mac}
+M~Backes, B~Pfitzmann, and M~Waidner.
+\newblock {Symmetric authentication within a simulatable cryptographic
+  library}.
+\newblock In {\em Computer Security - ESORICS 2003. 8th European Symposium on
+  Research in Computer Security. Proceedings (Lecture Notes in Comput. Sci.
+  Vol.2808)}, pages 271 -- 90, Berlin, Germany, 2003.
+
 \bibitem{xor-mac}
 M~Bellare, R~Guerin, and P~Rogaway.
 \newblock {XOR MACs: New methods for message authentication using finite
@@ -31,6 +47,19 @@ M~Bellare, P~Rogaway, and D~Wagner.
   2004. Revised Papers (Lecture Notes in Comput. Sci. Vol.3017)}, pages
   389--407, 2004.
 
+\bibitem{bellare1990new}
+Mihir Bellare and Shafi Goldwasser.
+\newblock New paradigms for digital signatures and message authentication based
+  on non-interactive zero knowledge proofs.
+\newblock In {\em Advances in Cryptology—CRYPTO’89 Proceedings}, pages
+  194--211. Springer, 1990.
+
+\bibitem{code-game}
+Mihir Bellare and Phillip Rogaway.
+\newblock {Code-Based Game-Playing Proofs and the Security of Triple
+  Encryption}.
+\newblock Cryptology ePrint Archive, Report 2004/331, 2004.
+
 \bibitem{xcbc}
 J~Black and P~Rogaway.
 \newblock {CBC MACs for arbitrary-length messages: the three-key
@@ -48,12 +77,36 @@ J~Black and P~Rogaway.
   Proceedings (Lecture Notes in Computer Science Vol.2332)}, pages 384 ---- 97,
   2002.
 
+\bibitem{blanchet2006automated}
+Bruno Blanchet and David Pointcheval.
+\newblock Automated security proofs with sequences of games.
+\newblock In {\em Advances in Cryptology-CRYPTO 2006}, pages 537--554.
+  Springer, 2006.
+
+\bibitem{computational-kerberos}
+Alexandra Boldyreva and Virendra Kumar.
+\newblock {Provable-security analysis of authenticated encryption in Kerberos}.
+\newblock In {\em Proceedings - IEEE Symposium on Security and Privacy}, pages
+  92--97, Berkeley, CA, United states, 2007.
+
+\bibitem{symbolic-survey}
+Veronique Cortier, Steve Kremer, and Bogdan Warinschi.
+\newblock {A survey of symbolic methods in computational analysis of
+  cryptographic systems}.
+\newblock {\em Journal of Automated Reasoning}, 46(3-4):225--259, 2011.
+
 \bibitem{alred}
 J~Daemen and V~Rijmen.
 \newblock {A new MAC construction ALRED and a specific instance ALPHA-MAC}.
 \newblock In {\em Fast Software Encryption. 12th International Workshop, FSE
   2005. Revised Selected Papers (Lecture Notes in Computer Science Vol. 3557)},
   pages 1--17, Berlin, Germany, 2005.
+
+\bibitem{Dolev-Yao}
+D~Dolev and A~C Yao.
+\newblock {On the security of public key protocols}.
+\newblock In {\em 22nd Annual Symposium on Foundations of Computer Science},
+  pages 350 -- 7, New York, NY, USA, 1981.
 
 \bibitem{pc-ice}
 Reouven Elbaz, Lionel Torres, Gilles Sassatelli, Pierre Guillemin, Michel
@@ -83,12 +136,25 @@ S~Goldwasser, S~Micali, and R~L Rivest.
   attacks}.
 \newblock {\em SIAM Journal on Computing}, 17(2):281--308, 1988.
 
+\bibitem{goldwasser1984probabilistic}
+Shafi Goldwasser and Silvio Micali.
+\newblock Probabilistic encryption.
+\newblock {\em Journal of computer and system sciences}, 28(2):270--299, 1984.
+
 \bibitem{key_recover}
 H~Handschuh and B~Preneel.
 \newblock {Key-recovery attacks on universal hash function based MAC
   algorithms}.
 \newblock In {\em Advances in Cryptology - CRYPTO 2008. 28th Annual
   International Cryptology Conference}, pages 144 ---- 61, 2008.
+
+\bibitem{cetd}
+Mei Hong, Hui Guo, and Sharon~X Hu.
+\newblock {A cost-effective tag design for memory data authentication in
+  embedded systems}.
+\newblock In {\em Proceedings of the 2012 International Conference on
+  Compilers, Architectures and Synthesis for Embedded Systems (CASES 2012)},
+  pages 17--26, 2012.
 
 \bibitem{omac}
 T~Iwata and K~Kurosawa.
@@ -115,6 +181,12 @@ E~Kasper and P~Schwabe.
 \newblock {Faster and timing-attack resistant AES-GCM}.
 \newblock In {\em Cryptographic Hardware and Embedded Systems - CHES 2009.
   Proceedings 11th International Workshop}, pages 1--17, 2009.
+
+\bibitem{kilian1996protect}
+Joe Kilian and Phillip Rogaway.
+\newblock How to protect des against exhaustive key search.
+\newblock In {\em Advances in Cryptology—CRYPTO’96}, pages 252--267.
+  Springer, 1996.
 
 \bibitem{hardware_attack}
 Markus~G Kuhn.
@@ -216,6 +288,12 @@ P~Sarkar.
 \newblock {\em IEEE Transactions on Information Theory}, 56(8):4025--4037,
   2010.
 
+\bibitem{shoup2000using}
+Victor Shoup.
+\newblock Using hash functions as a hedge against chosen ciphertext attack.
+\newblock In {\em Advances in Cryptology—EUROCRYPT 2000}, pages 275--288.
+  Springer, 2000.
+
 \bibitem{vaslin-MA}
 R~Vaslin, G~Gogniat, J-P Diguet, E~Wanderley, R~Tessier, and W~Burleson.
 \newblock {A security approach for off-chip memory in embedded microprocessor
@@ -228,6 +306,18 @@ Chenyu Yan, B~Rogers, D~Englender, D~Solihin, and M~Prvulovic.
   authentication}.
 \newblock In {\em Proceedings. 33rd International Symposium on Computer
   Architecture}, pages 12 pp. ----, 2006.
+
+\bibitem{yao1982theory}
+Andrew~C Yao.
+\newblock Theory and application of trapdoor functions.
+\newblock In {\em Foundations of Computer Science, 1982. SFCS'08. 23rd Annual
+  Symposium on}, pages 80--91. IEEE, 1982.
+
+\bibitem{yasuda2011new}
+Kan Yasuda.
+\newblock A new variant of pmac: beyond the birthday bound.
+\newblock In {\em Advances in Cryptology--CRYPTO 2011}, pages 596--609.
+  Springer, 2011.
 
 \bibitem{attack_blk}
 Z~Yuan, W~Wang, K~Jia, G~Xu, and X~W.
