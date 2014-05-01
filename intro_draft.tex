@@ -98,12 +98,6 @@ the adversary A is provided a black-box access to the tag generation system TG$_
 
 The quantitative security notion of a MAC scheme is forgery probability, expressed as Forgery$_{MAC}$=Pr[Forgery(MAC,A)=1].
 \paragraph{The Correlation between Security and Randomness}
-\begin{itemize}
-	\item Ideal random number producing cannot be implemented
-	\item Some function can behave randomly, called pseudorandom function(PRF)
-	\item PRF accept various length inputs and produce fixed length output behave like coin flipping
-	\item PRF is secure MAC
-\end{itemize}
 As ideal random value generator is impossible to implement in real world, research works on constructing high quality random function in real world has been introduced since 1980s. Goldreich, Goldwasser, and Micali introduced the concept of pseudorandom function(PRF) in \cite{prf} indicating that a PRF is a function whose behaviour cannot be distinguish from a ideal random value generator by an adversary with some resource limitation. They also asserted that any good
 PRF is a secure MAC scheme under the quantitative
 security notion. Bellare, Kilian and Rogaway proved this assertion in
@@ -171,7 +165,11 @@ security notion of MAC schemes in computational model to do manually analysis.
 
 \section{Related Works} 
 \subsection{MAC Schemes and Security Analysis}
-In some research works, the stateless MAC schemes requiring only a secrete key
+To our knowledge, existing MAC schemes can be classified to two categories:
+stateless MAC schemes, which use only a key as secret information to process the
+input and generate the tag; stateful MAC schemes, which adopt other secret
+information blocks(such as nonce in some designs) besides the key in input
+processing and tag generation.  In some research works, the stateless MAC schemes requiring only a secrete key
 as the resource of randomness for tag generation are denoted as deterministic MAC schemes.
 Some MAC schemes require an additional input block, named nonce, in the
 generation of each tag. Nonce is used to provide uniqueness for each input invoking the MAC scheme. MAC schemes with nonce as additional input are called stateful MAC schemes in some research works.
