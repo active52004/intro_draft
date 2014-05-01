@@ -22,6 +22,8 @@
 \citation{Rogaway2011}
 \citation{cbc1994}
 \citation{signature}
+\citation{prf}
+\citation{cbc1994}
 \@writefile{toc}{\contentsline {paragraph}{The forgery attacks on MAC Schemes}{5}}
 \@writefile{toc}{\contentsline {paragraph}{Chosen-message attacks}{5}}
 \@writefile{toc}{\contentsline {paragraph}{The Security Notions of MAC schemes}{5}}
@@ -29,32 +31,32 @@
 \citation{prf}
 \citation{cbc1994}
 \citation{prf}
-\citation{cbc1994}
-\citation{prf}
 \citation{goldwasser1984probabilistic}
 \citation{yao1982theory}
 \citation{shoup2000using}
 \citation{bellare1990new}
-\@writefile{toc}{\contentsline {paragraph}{The Randomness of a MAC scheme}{6}}
-\@writefile{toc}{\contentsline {paragraph}{Code-based Game-playing Proofs}{6}}
 \citation{kilian1996protect}
 \citation{code-game}
 \citation{yasuda2011new}
 \citation{code-game}
 \citation{code-game}
+\@writefile{toc}{\contentsline {paragraph}{The Randomness of a MAC scheme}{6}}
+\@writefile{toc}{\contentsline {paragraph}{Code-based Game-playing Proofs}{6}}
 \citation{blanchet2006automated}
 \@writefile{toc}{\contentsline {paragraph}{Analysis approach for the MAC scheme in Cost-Effective Tag Design}{8}}
 \@writefile{toc}{\contentsline {section}{\numberline {3}Related Works}{8}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1}MAC Schemes and Security Analysis}{8}}
+\@writefile{toc}{\contentsline {paragraph}{Stateless and Stateful MAC schemes}{8}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.1}Stateless(Deterministic) MAC Schemes}{8}}
 \@writefile{toc}{\contentsline {paragraph}{Iterated MAC Schemes}{8}}
-\@writefile{toc}{\contentsline {paragraph}{Raw CBC-MAC}{8}}
+\@writefile{toc}{\contentsline {paragraph}{Original CBC-MAC}{8}}
 \citation{cbc1994}
 \citation{emac}
 \citation{xcbc}
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces The Raw CBC-MAC\relax }}{9}}
 \newlabel{fig:CBC-mac}{{2}{9}}
-\@writefile{toc}{\contentsline {paragraph}{EMAC}{9}}
+\@writefile{toc}{\contentsline {paragraph}{EMAC: CBC-MAC for Arbitrary Input Length}{9}}
+\@writefile{toc}{\contentsline {paragraph}{XCBC: three key version of CMAC}{9}}
 \citation{xcbc}
 \citation{new}
 \citation{tmac}
@@ -62,18 +64,17 @@
 \citation{new}
 \citation{omac}
 \citation{omac}
+\citation{alred}
 \@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces The class of CMAC\relax }}{10}}
 \newlabel{fig:CMAC}{{3}{10}}
-\@writefile{toc}{\contentsline {paragraph}{XCBC: three key version of CMAC }{10}}
 \@writefile{toc}{\contentsline {paragraph}{TMAC: two key version of CMAC}{10}}
 \@writefile{toc}{\contentsline {paragraph}{OMAC: single key version of CMAC}{10}}
-\citation{alred}
+\@writefile{toc}{\contentsline {paragraph}{other iterated MAC designs}{10}}
 \citation{xor-mac}
 \citation{xor-mac}
 \citation{xor-mac}
 \citation{pmac}
 \citation{pmac}
-\@writefile{toc}{\contentsline {paragraph}{other iterated MAC designs}{11}}
 \@writefile{toc}{\contentsline {paragraph}{Parallel MAC Schemes}{11}}
 \@writefile{toc}{\contentsline {paragraph}{XOR MAC scheme}{11}}
 \@writefile{toc}{\contentsline {paragraph}{Raw PMAC}{11}}
@@ -83,21 +84,21 @@
 \citation{tweak_pmac}
 \citation{tweak_pmac}
 \citation{new}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces RAW PMAC\relax }}{12}}
-\newlabel{fig:PMAC}{{4}{12}}
-\@writefile{toc}{\contentsline {paragraph}{Tweakable block cipher and Optimized PMAC}{12}}
 \citation{pmac}
 \citation{improve_pmac}
 \citation{pmac}
 \citation{new}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces RAW PMAC\relax }}{12}}
+\newlabel{fig:PMAC}{{4}{12}}
+\@writefile{toc}{\contentsline {paragraph}{Tweakable block cipher and Optimized PMAC}{12}}
 \citation{iPMAC}
 \citation{iPMAC}
 \citation{pmac}
 \citation{gcm}
+\citation{breaking}
 \@writefile{toc}{\contentsline {paragraph}{iPMAC}{13}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.2}Stateful MAC Schemes}{13}}
 \@writefile{toc}{\contentsline {paragraph}{GMAC}{13}}
-\citation{breaking}
 \citation{Rogaway2011}
 \citation{key_recover}
 \citation{ae-notion}
@@ -116,8 +117,8 @@
 \citation{hardware_attack}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Authentication-Encryption Schemes and Security Analysis}{14}}
 \@writefile{toc}{\contentsline {paragraph}{Attacking the Authentication Systems}{14}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Hardware Message Authentication(MA) Systems}{15}}
-\@writefile{toc}{\contentsline {paragraph}{Concepts of Message Authentication(MA) System}{15}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Hardware Message Authentication(MA) Systems}{14}}
+\@writefile{toc}{\contentsline {paragraph}{Concepts of Message Authentication(MA) System}{14}}
 \@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces The Concept of MA System\relax }}{15}}
 \newlabel{fig:ma_system}{{5}{15}}
 \@writefile{toc}{\contentsline {paragraph}{Security Evaluation for MA Systems}{15}}
@@ -125,9 +126,9 @@
 \citation{gcm}
 \citation{gcm}
 \citation{breaking}
-\@writefile{toc}{\contentsline {paragraph}{Uni-processor Systems}{16}}
 \citation{pc-ice}
 \citation{ae-notion}
+\@writefile{toc}{\contentsline {paragraph}{Uni-processor Systems}{16}}
 \citation{rogers-MA}
 \citation{ae-notion}
 \citation{vaslin-MA}

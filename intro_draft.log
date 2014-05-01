@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.4.19)  1 MAY 2014 19:53
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.4.29)  1 MAY 2014 21:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **intro_draft.tex
 (./intro_draft.tex
 LaTeX2e <2011/06/27>
-Babel <3.9f> and hyphenation patterns for 2 languages loaded.
+Babel <3.9h> and hyphenation patterns for 2 languages loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
 (/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
@@ -247,35 +247,35 @@ Package pdftex.def Info: ./diagrams/MAC.pdf used on input line 34.
 File: ./diagrams/cbc-mac.pdf Graphic file (type pdf)
 
 <use ./diagrams/cbc-mac.pdf>
-Package pdftex.def Info: ./diagrams/cbc-mac.pdf used on input line 184.
+Package pdftex.def Info: ./diagrams/cbc-mac.pdf used on input line 181.
 (pdftex.def)             Requested size: 253.54921pt x 179.17075pt.
  [8]
 <./diagrams/cmac.pdf, id=50, 573.94424pt x 275.83049pt>
 File: ./diagrams/cmac.pdf Graphic file (type pdf)
 
 <use ./diagrams/cmac.pdf>
-Package pdftex.def Info: ./diagrams/cmac.pdf used on input line 202.
+Package pdftex.def Info: ./diagrams/cmac.pdf used on input line 198.
 (pdftex.def)             Requested size: 286.97142pt x 137.9149pt.
  [9 <./diagrams/cbc-mac.pdf>] [10 <./diagrams/cmac.pdf>] <./diagrams/PMAC.pdf, 
-id=86, 638.385pt x 443.25601pt>
+id=85, 638.385pt x 443.25601pt>
 File: ./diagrams/PMAC.pdf Graphic file (type pdf)
 
 <use ./diagrams/PMAC.pdf>
-Package pdftex.def Info: ./diagrams/PMAC.pdf used on input line 238.
+Package pdftex.def Info: ./diagrams/PMAC.pdf used on input line 233.
 (pdftex.def)             Requested size: 319.19171pt x 221.62746pt.
  [11] [12 <./diagrams/PMAC.pdf>] [13]
-Overfull \hbox (8.55417pt too wide) in paragraph at lines 281--281
+Overfull \hbox (8.55417pt too wide) in paragraph at lines 276--276
 []\OT1/cmr/bx/n/12 Authentication-Encryption Schemes and Se-cu-rity Anal-
  []
 
-<./diagrams/MA_concept.pdf, id=117, 663.07722pt x 281.85298pt>
+<./diagrams/MA_concept.pdf, id=116, 663.07722pt x 281.85298pt>
 File: ./diagrams/MA_concept.pdf Graphic file (type pdf)
 
 <use ./diagrams/MA_concept.pdf>
-Package pdftex.def Info: ./diagrams/MA_concept.pdf used on input line 306.
+Package pdftex.def Info: ./diagrams/MA_concept.pdf used on input line 301.
 (pdftex.def)             Requested size: 331.5378pt x 140.92615pt.
  [14] [15 <./diagrams/MA_concept.pdf>]
-Overfull \hbox (4.91609pt too wide) in paragraph at lines 328--330
+Overfull \hbox (4.91609pt too wide) in paragraph at lines 323--325
 []\OT1/cmr/m/n/10 Some MA sys-tems are con-structed based on authenticated-encr
 yption schemes
  []
@@ -306,25 +306,24 @@ Missing character: There is no € in font cmti10!
 Missing character: There is no ” in font cmti10!
  [21]) [22] (./intro_draft.aux) ) 
 Here is how much of TeX's memory you used:
- 3356 strings out of 495031
- 50514 string characters out of 6181531
- 113889 words of memory out of 5000000
- 6542 multiletter control sequences out of 15000+600000
+ 3356 strings out of 495028
+ 50514 string characters out of 6181497
+ 114145 words of memory out of 5000000
+ 6545 multiletter control sequences out of 15000+600000
  5958 words of font info for 22 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  44i,8n,42p,1330b,273s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/pub
 lic/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
 sfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-mi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
-></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/s
-hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/t
-exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on intro_draft.pdf (22 pages, 557098 bytes).
+/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
+10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><
+/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/s
+hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
+Output written on intro_draft.pdf (22 pages, 550239 bytes).
 PDF statistics:
- 201 PDF objects out of 1000 (max. 8388607)
- 117 compressed objects within 2 object streams
+ 197 PDF objects out of 1000 (max. 8388607)
+ 114 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  26 words of extra memory for PDF output out of 10000 (max. 10000000)
 
