@@ -29,12 +29,7 @@ In the scenario of processor-memory architecture, data integrity refers to maint
 	\item Introducing new content: The content of data in the system is modified, or data construct by the attacker is inserted to the system.
 	\item Replacing data with valid copy: The data D in transmission or on the memory is replace with the following two types of copy: A copy of D at an old time point or a copy of other data from different memory address.
 \end{enumerate}
-\begin{figure}[htbp]
-\centering
-\includegraphics[scale=0.4]{./diagrams/MAC.pdf}
-\caption{The Concept of Deterministic MAC Scheme}
-\label{fig:deterministic_mac}
-\end{figure}
+
 
 When the processor writes a data block D to the memory, MAC scheme computes a tag  and concatenate the tag with D forming a data-tag pair. The data-tag pair is sent to the frame on off-chip memory with address ADDR for storage.
 When the processor reads a data from the frame of ADDR, the data-pair is sent to the chip and to MAC scheme. Assume the data part in the pair read is D1 and tag part is T1. MAC scheme compute a tag T2 using D1 and T2 is compared with T1. If T1 is identical to T2, D1 is assumed to be untampered.
@@ -339,5 +334,5 @@ When cache reads data, ciphertext block is read to chip, xored with the OTP comp
 The weakness of this design is that CRC is less secure compared with hash functions such as MD5 or SHA-1. This weakness was pointed by the authors in this paper and by Elbaz et al. in \cite{area}.
 
 \bibliographystyle{plain}
-\bibliography{./resources/tag_paper.bib}
+\bibliography{tag_paper.bib}
 \end{document}
