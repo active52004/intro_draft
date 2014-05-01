@@ -33,25 +33,27 @@ In the scenario of processor-memory architecture, data integrity refers to maint
 \centering
 \includegraphics[scale=0.4]{./diagrams/MAC.pdf}
 \caption{The Concept of Deterministic MAC Scheme}
-\label{deterministic_mac }
+\label{fig:deterministic_mac}
 \end{figure}
 
-When the processor writes a data block D to the memory, MAC scheme computes a tag  and concatenate the tag withe data forming a data-tag pair. The data-tag pair is sent to off-chip memory for storage.
-When the processor reads a data from memory, the data-pair is sent to the chip and to MAC scheme. Assume the data part is D and tag part is T1. MAC scheme compute a tag T2 using D T2 is compared with T1. If T1 is identical to T2, D is assumed to be untampered.
- Figure 3-b expresses the functionality of MAC scheme in integrity protection.
-If the integrity of a processor-memory system is protected by MAC scheme, the possible attacks are:
+When the processor writes a data block D to the memory, MAC scheme computes a tag  and concatenate the tag with D forming a data-tag pair. The data-tag pair is sent to the frame on off-chip memory with address ADDR for storage.
+When the processor reads a data from the frame of ADDR, the data-pair is sent to the chip and to MAC scheme. Assume the data part in the pair read is D1 and tag part is T1. MAC scheme compute a tag T2 using D1 and T2 is compared with T1. If T1 is identical to T2, D1 is assumed to be untampered.
+ Figure \ref{fig:deterministic_mac} expresses the functionality of MAC scheme in integrity protection.
+Assume the data-tag pair stored on the off-chip memory with address ADDR is marked as D-T, the possible attacks on MAC schemes includes:
 \begin{enumerate}
-	\item Modify the content of a data-tag pair
-	\item Insert new data-tag pair
-	\item Replace the content of a data-tag pair with a copy of data-tag pair from other address
-	\item Replace the content of a data-tag pair with a copy of this pair in an old time point
+	\item Modify the content of D-T on ADDR 
+	\item Insert new data-tag pair to a empty frame on the memory
+	\item Replace the content of D-T with a copy of data-tag pair from another off-chip memory frame 
+	\item Replay attack: copy data pair D-T on ADDR wroten on early time stamp T1 and replace the data pair on ADDR on latter time stamp with D-T 
 \end{enumerate}
-If a MAC scheme is capable to defend the 1st and 2nd attacks in the list, it should ensure that for any data block D, the tag is randomly assigned. If this scheme is capable to defend the 3rd and 4th attacks too, it should ensure for any two identical data blocks D1 and D2 that are written to memory on different time or to different addresses, their tags T1 and T2 should be randomly generated.
+If a MAC scheme is capable to defend the 1st and 2nd attacks in the list, it should ensure that for any two distinct data D1 and D2, the corresponding tag T1 and T2 should be two random message blocks. If this scheme is capable to defend the 3rd and 4th attacks too, it should ensure for any two identical data blocks D1 and D2 that are written to memory on different time or to different addresses, their tags T1 and T2 should be randomly generated.
 
+\paragraph{Formal Approaches on Security Analysis}
+Since 1980s, two formal approaches have been developed for analyzing the security protocols. "Formal" means means the security notions for a type of protocols is general to all designs and the result of each design in a kind of approach should be in the same format. One approach is named "computational model"in some research works. The computational model based approaches quantify the security of a protocol with probability and complexity. The adversary in computational model cannot acquire the secret information stored in trust area while has no other limitation in breaking the protocol. The security results acquired with computational model based approaches represent attack situations in real world. The weakness of computational model includes manually evaluation in most cases and error-prone. 
+The other formal approach adopted in security analysis is named "symbolic model" in some research works. The cryptographic primitives used in the construction of protocol are assumed to be black box and the adversary can not predict the output of crypto-primitive without knowing the secret information. Each primitive is modeled to a term and represented as a string. The protocol can be represented with the terms to form a sequence of strings and the security result of a protocol has two options: security or insecure.  
 \subsection{Symbolic Model based Security Analysis}
 Dolev and Yao introduced \cite{Dolev-Yao} a evaluation mechanism for analyzing the security of cryptographic protocol in
-symbolic model(called formal methods in some research works). Each operation in the protocol analyzed is modeled to a term
-algebra with strong security assumption. The security result of a protocol in
+symbolic model(called formal methods in some research works). The security result of a protocol in
 Dolev-Yao model has two possible value: secure with cryptographic primitive used
 behaves like black box or an attack breaking the protocol exist.  
 \paragraph{Symbolic Model Based Security Analysis on MAC Schemes}
@@ -83,7 +85,7 @@ referred from \cite{symbolic-survey}.
 \subsubsection{Security Notion of MAC Schemes in Computational Model}
 From the viewpoint of computational model, the security of a MAC scheme can be
 broken if the resources, such as computation time, is unlimited for the
-attacker, and AP system can always be broken at some time. Research works on
+attacker. Research works on
 security analysis on MAC schemes try quantify the evaluation result under the assumption that the attack has limitation on computation resources.
 \paragraph{The forgery attacks on MAC Schemes}
 When attacking a MAC Scheme, the adversary try to send a pair(M,T) to the receiver to make VF$_k$(M,T)=1 while M did not originate with the legal sender. The fake pair(M$_f$,T$_f$) that makes VF$_k$(M$_f$,T$_f$)=1 is called a forgery from the adversary. A successful forgery attack indicates that the adversary has made a forgery. 
@@ -94,14 +96,19 @@ A strong type of attack that an adversary can conduct on the message authenticat
 The formalised quantitative notion of the security of a MAC scheme was introduced by Bellare et al. in \cite{cbc1994}. This notion follows the security notion of digital signature introduced in \cite{signature}. The successful forgery on a MAC scheme from an adversary A is measured by a experiment called Forgery(MAC,A). In Forgery(MAC,A),  
 the adversary A is provided a black-box access to the tag generation system TG$_K$(). When TG$_K$() takes an input message M$_i$, it returns tag T$_i$ to A. A conducts uf-cma by keep sending the message queries M$_i$ and observes the relative tag T$_i$ for limited times. On the other hand, A is provided a black-box access to the verification system VF$_K$(). When A sends a pair(M$_j$,T$_j$) to VF$_K$(), the VF$_K$() computes the tag T of M$_j$ and compares T with T$_j$. If T=T$_j$ then VF$_K$()=1 otherwise 0. If A sends a pair(M,T) that makes VF$_K$() outputs 1 while M has not appeared in the previous queries of uf-cma, then A succeeds a forgery attack and Forgery(MAC,A)=1.
 
-The quantitative security notion of a MAC scheme is forgery probability, expressed as Forgery$_MAC$=Pr[Forgery(MAC,A)=1].
+The quantitative security notion of a MAC scheme is forgery probability, expressed as Forgery$_{MAC}$=Pr[Forgery(MAC,A)=1].
 \paragraph{The Correlation between Security and Randomness}
-Goldreich, Goldwasser, and Micali asserted in \cite{prf} that any good
-pseudorandom function(PRF) is a secure MAC scheme under the quantitative
+\begin{itemize}
+	\item Ideal random number producing cannot be implemented
+	\item Some function can behave randomly, called pseudorandom function(PRF)
+	\item PRF accept various length inputs and produce fixed length output behave like coin flipping
+	\item PRF is secure MAC
+\end{itemize}
+As ideal random value generator is impossible to implement in real world, research works on constructing high quality random function in real world has been introduced since 1980s. Goldreich, Goldwasser, and Micali introduced the concept of pseudorandom function(PRF) in \cite{prf} indicating that a PRF is a function whose behaviour cannot be distinguish from a ideal random value generator by an adversary with some resource limitation. They also asserted that any good
+PRF is a secure MAC scheme under the quantitative
 security notion. Bellare, Kilian and Rogaway proved this assertion in
-\cite{cbc1994} saying that if a system behave like a pseudoranom function, this
-system is a secure MAC scheme if meeting the requirements on domain and range of
-MAC schemes. Based on these two reduction of security notion, latter researches
+\cite{cbc1994} saying that if a system behave like a PRF, this
+system is a secure MAC scheme. Based on this converted security notion of MAC schemes, latter researches
 on computational model based security evaluation of MAC schemes posted their focuses on analyzing whether the MAC scheme evaluated behaves like a PRF.
 \paragraph{The Randomness of a MAC scheme}
 The definition of PRF was introduced in \cite{prf} indicating that PRF could not be distinguished from a ideal random function each bit of whose output was a coin flip. To define how closely a MAC scheme behaves like a PRF, Bellare et al. provided a quantitative notion in \cite{cbc1994} named Adv$^{PRF}_{MAC}$(), which was based on the concept of distinguisher introduced in\cite{prf}. 
@@ -114,13 +121,12 @@ We can see that if F0 behaves much like F1, it is hard for A to distinguish betw
 \paragraph{Code-based Game-playing Proofs}
 In cryptography, a viewpoint of game-playing proofs represents the technique that abstracts the interaction between the adversary and environment to a program named game. Computing the probability of adversary becomes the stepwise refinement of a sequences of games. 
 The application of this viewpoint of game-playing proofs in security analysis
-began with the article "Probabilistic encryption" from Goldwasser and
-Micali\cite{goldwasser1984probabilistic}, and "Theory and applications of
-trapdoor functions" from Yao \cite{yao1982theory}and then adopted in the
+began with the article\cite{goldwasser1984probabilistic} from Goldwasser and
+Micali, and\cite{yao1982theory} from Yao and then adopted in the
 security analysis of various encryption systems like\cite{shoup2000using} and
 authentication systems like \cite{bellare1990new}.  
 
-In "How to protect DES against exhaustive key search"\cite{kilian1996protect}, Kilian and Rogaway
+In \cite{kilian1996protect}, Kilian and Rogaway
 modeled a game with disciplines to a piece of code and introduced the idea of
 code-base game-playing proofs. The application of code-based game-playing
 proof on analyzing authentication systems origins from CBC-MAC, provided by
@@ -128,49 +134,34 @@ Bellare and Rogaway in \cite{code-game}. Researchers then adopt code-based game-
 proofs to analyzing various MAC schemes and authenticated-encryption schemes,
 like \cite{yasuda2011new}. 
 
-In the concepts of game-playing proofs from \cite{code-game}, a game is program. The
-sequences of game start two programs describing the MAC scheme(marked as G0) and an ideal
-random function(marked as G1). Some step of operation in G0 has a condition
-effecting the
-randomness of output. When the
-condition of a step effecting the final ouptut are met, a signal named "bad" is
-set to true. The following operation after bad signal is set differs in G0 and
-G1, which differ the final output of G0 and G1. The difference of output from G0
-and G1 make the adversary distinguish two games  The difference of output from
-G0 and G1 make the adversary distinguish two games  The procedure of analyzing a MAC scheme with code-based game-playing proofs can
-be formalized to computing the probability that bad signals are set to true.
+In the concepts of game-playing proofs from \cite{code-game}, a game is program. When using code-based game-playing proofs to analyze the security of a MAC scheme, the MAC scheme is conceptualized to a game program and each step represent an operation in the MAC scheme. This game representing the MAC scheme is marked as G0. The PRF with same range and domain to the MAC scheme is conceptualized to a game G1.  Based on the depiction in \cite{code-game}, some steps in G0 are can set the signal named "bad" from initialized status(false) to "true". The codes expressing  G0 and G1 are exactly identical except the steps following the operation of setting "bad" signal to true. That means the adversary observing G0 and G1 cannot make distinguish until bad signal is set, which will effect the behaviour of outputs from two games. After G0 and G1 are modeled, the security notion of MAC scheme, the distinguishing probability, is computed by quantify the probability that bad signal is set to true in some attack conditions. The procedure in game-playing proofs to compute Pr[bad is set to true] is conducted by modifying the game each time to form a new game with less steps setting bad signal. The end of this reduction of games is the game in which pr[bad is true] can be easily computed manually.  
 
-The obvious benifit brought by code-based game-playing proofs is the
-simplication of computational model based security analysis. Computing the bound
+The obvious benefit brought by code-based game-playing proofs is the
+simplification of computational model based security analysis. Computing the bound
 of distinguishing probability of an adversary for a MAC scheme and an ideal
-random function is reducted to the computation of probability that "bad" signal
+random function is converted to the computation of probability that "bad" signal
 is set. The procedure of security analysis in computational model is formalized
-and can be conduceted automately with programing language.
+and can be conducted automatically with programing language.
 
-The prerequisite of adopting code-based game-playing proofs to analyze the
-security of a MAC scheme is that the scheme is constructed with cryptographic
-primitives with strong security guarantee, such as ideal block cipher or one-way
-permutation. This prerequisite ensure the properties of game-playing technique:
+Based on our analysis, the prerequisite of adopting code-based game-playing proofs to analyze the
+security of a MAC scheme is that the scheme analyzed is constructed with components whose behaviour have been analyzed in cryptographic
+level. There should be at lease one kind of component in the MAC scheme has strong randomness, such as ideal block cipher or one-way permutation. This prerequisite ensure the properties of game-playing technique:
 \begin{itemize}
-	\item After the MAC scheme is modeled into the initial game G0, its output should be
-guaranteed to behave the same as the output from ideal random function, which is
-modeled to G1
-	\item The behaviour of any compoent in the construction has been
-systematically analyzed. This property determine which component has "bad"
-signal 
-	\item When bad signal is set to true, the next step operation in G0 should
-be consistant due to the systemally analyzed behaviour of the component 
+	\item If the bad signal is not set to true, the behaviour of outputs from G0(MAC Scheme) should be exactly identical to the outputs from G1(ideal random value generator). 
+	\item It is concrete to define the steps setting bad signal 
+	\item When bad signal is set to true, the behaviour of next step operation in G0 the affection on final output should
+be predictable.   
 \end{itemize}
-If the MAC scheme is constructed without cryptographic primitive, at least one
+If the MAC scheme is constructed the components that be behaviour of at least one of them is not systematically analyzed , at least one
 of the above properties can not be met, then code-based game-playing proofs
-technique is not capable to work.
+technique is not capable to work. 
 
 Automated security analysis for authentication system origin from Blanchet and
 Pointcheval\cite{blanchet2006automated}. Their automated security analysis system is designed based on
 game-playing proof technique and games are modeled with programming language. As
-game-playing techique cannot be applied on the MAC schemes constructed without
-cryptographic primitives, the automated security analysis tools can be used only
-on deterministic MAC schemes as they are constructed with ideal block cipher.   
+game-playing technique cannot be applied on the MAC schemes constructed without
+cryptographic primitives, to our knowledge the existing automated security analysis tools have be used only
+on stateless MAC schemes as they are constructed with ideal block cipher.   
 \paragraph{Analysis approach for the MAC scheme in Cost-Effective Tag Design}
 As the MAC scheme in Cost-Effective Tag Design is constructed with bit segment
 swap and block-level rotate shifting,nonce of which is a cryptographic primitive
@@ -192,9 +183,9 @@ In iterated MAC scheme, the process of a block in message M relies on the output
 \centering
 \includegraphics[scale=0.3]{./diagrams/cbc-mac.pdf}
 \caption{The Raw CBC-MAC}
-\label{CBC-mac }
+\label{fig:CBC-mac}
 \end{figure}
-The research on iterated MAC schemes started from the raw CBC-MAC expressed in Figure 3.
+The research on iterated MAC schemes started from the raw CBC-MAC expressed in Figure \ref{fig:CBC-mac}.
 \paragraph{Raw CBC-MAC}
 The cryptographic primitive used in the raw CBC-MAC scheme is block cipher.  
 The raw CBC-MAC is a secure MAC for only fixed length inputs. Assume the tag T of message M from CBC-MAC can be expressed as T = CBC-MAC$_k$(M), for another input M$\|$(M$\oplus$T), the tag T1=CBC-MAC(M$\|$(M$\oplus$T))=T. This attack indicates that the raw CBC-MAC is vulnerable if the input length is not fixed.
@@ -210,9 +201,9 @@ Petrank and Rackof provided the original security evaluation of EMAC in \cite{em
 \centering
 \includegraphics[scale=0.5]{./diagrams/cmac.pdf}
 \caption{The class of CMAC}
-\label{CMAC }
+\label{fig:CMAC}
 \end{figure}
-Hence the raw CBC-MAC is vulnerable if the input length is not fixed, a class of MAC schemes named CMAC are developed to provide security for arbitrary length of inputs. The structure of the  variants of CMAC is modeled in Figure 4.
+Hence the raw CBC-MAC is vulnerable if the input length is not fixed, a class of MAC schemes named CMAC are developed to provide security for arbitrary length of inputs. The structure of the  variants of CMAC is modeled in Figure \ref{fig:CMAC}.
 \paragraph{XCBC: three key version of CMAC }
 Black and Rogaway introduced a optimized version of EMAC called XCBC in \cite{xcbc}.
 There are two motivations of XCBC scheme: providing security for arbitrary length input; eliminate unnecessary padding operation on the input blocks in EMAC.
@@ -246,7 +237,7 @@ On the other hand, the nonce maintained by the user of XOR mac is regarded a dis
 \centering
 \includegraphics[scale=0.5]{./diagrams/PMAC.pdf}
 \caption{RAW PMAC}
-\label{PMAC}
+\label{fig:PMAC}
 \end{figure}
 \paragraph{Raw PMAC}
 Black and Rogaway introduced an parallel MAC scheme named PMAC in \cite{pmac}. 
@@ -287,7 +278,7 @@ In \cite{Rogaway2011}, Rogaway pointed the weakness of GMAC as a MAC scheme when
 
 Handschuh and Preneel introduced key-recovery attacks on universal hash function based MAC algorithms in \cite{key_recover}. They introduced two types of attacks: weak key finding and partial information leaks.
 
-\subsection{Authentication-Ecryption Schemes and Security Analysis}
+\subsection{Authentication-Encryption Schemes and Security Analysis}
 After various kind of MAC schemes were evaluated and claimed to be secure, a new cryptosystem, the Authenticated Encryption(AE) was introduced The Authenticated to combine the encryption of
 plaintext blocks and generation of the MAC in a single scheme to provide both
 confidentiality and integrity. According to the analysis of by Bellare and Namprempre in \cite{ae-notion}, AE schemes can be categorized as Encrypt-then-MAC, Encrypt-and-MAC and MAC-then-Encrypt three structures. Encrypt-then-MAC was proved to be most secure structure and can defend most kinds of attacks. 
@@ -314,9 +305,9 @@ In the design of Message Authentication(MA) system, the on-chip data is assumed 
 \centering
 \includegraphics[scale=0.5]{./diagrams/MA_concept.pdf}
 \caption{The Concept of MA System}
-\label{ma_system}
+\label{fig:ma_system}
 \end{figure}
-Figure 1 expresses the concept of MA system for chip-memory communication. 
+Figure \ref{fig:ma_system} expresses the concept of MA system for chip-memory communication. 
 When processor writes a data block, marked as D, to and address, marked as addr, on the memory, processor sends D to MA system and output a message block, marked as message(D, add$_B$), where add$_B$ represents an additional data block. The message block message(D,add$_B$) can be the data block D only, D concatenated with a short block(commonly called tag) or other format of D. The content of message(D,add$_B$) is determined by the cryptographic primitive adopted by the MA system.
 When the processor wants to read the data D from address addr, the message(D,add$_B$) is read to SoC and sent to MA system first. After verified by MA, if the data D is not tampered, MA sends a signal indicating pass to processor and send the D to the processor, where D is extracted from message(D,add$_B$) block read from memory.
 If the MA system finds that the D is tampered, MA sends a failure signal to processor, and invoke the exception handling procedure.

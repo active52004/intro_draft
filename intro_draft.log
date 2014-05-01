@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.4.19)  28 APR 2014 09:12
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.4.29)  30 APR 2014 21:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **intro_draft.tex
 (./intro_draft.tex
 LaTeX2e <2011/06/27>
-Babel <3.9f> and hyphenation patterns for 2 languages loaded.
+Babel <3.9h> and hyphenation patterns for 2 languages loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
 (/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
@@ -306,10 +306,10 @@ Missing character: There is no € in font cmti10!
 Missing character: There is no ” in font cmti10!
  [20]) [21] (./intro_draft.aux) ) 
 Here is how much of TeX's memory you used:
- 3356 strings out of 495031
- 50497 string characters out of 6181531
- 111888 words of memory out of 5000000
- 6542 multiletter control sequences out of 15000+600000
+ 3356 strings out of 495028
+ 50514 string characters out of 6181497
+ 112144 words of memory out of 5000000
+ 6545 multiletter control sequences out of 15000+600000
  5958 words of font info for 22 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  44i,8n,42p,937b,273s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -321,7 +321,7 @@ mi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
 ></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/s
 hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/t
 exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on intro_draft.pdf (21 pages, 555589 bytes).
+Output written on intro_draft.pdf (21 pages, 555582 bytes).
 PDF statistics:
  198 PDF objects out of 1000 (max. 8388607)
  115 compressed objects within 2 object streams
