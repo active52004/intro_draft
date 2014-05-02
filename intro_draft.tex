@@ -174,7 +174,7 @@ In iterated MAC scheme, the process of a block in message M relies on the output
 \begin{figure}[htbp]
 \centering
 \includegraphics[scale=0.3]{./diagrams/cbc-mac.pdf}
-\caption{The Raw CBC-MAC}
+\caption{The Original CBC-MAC}
 \label{fig:CBC-mac}
 \end{figure}
 The research on iterated MAC schemes started from the original CBC-MAC expressed in Figure \ref{fig:CBC-mac}.
@@ -191,7 +191,7 @@ Hence the original CBC-MAC is vulnerable if the input length is not fixed, a cla
 \begin{figure}[htbp]
 \centering
 \includegraphics[scale=0.5]{./diagrams/cmac.pdf}
-\caption{The class of CMAC}
+\caption{The CMAC family}
 \label{fig:CMAC}
 \end{figure}
 \paragraph{XCBC: Three Key Version of CMAC}
@@ -226,10 +226,10 @@ On the other hand, the nonce maintained by the user of XOR mac is regarded a dis
 \begin{figure}[htbp]
 \centering
 \includegraphics[scale=0.5]{./diagrams/PMAC.pdf}
-\caption{RAW PMAC}
+\caption{The Original PMAC}
 \label{fig:PMAC}
 \end{figure}
-\paragraph{Raw PMAC}
+\paragraph{The Original PMAC}
 Black and Rogaway introduced an parallel MAC scheme named PMAC in \cite{pmac}. 
 The improvement of PMAC compared with XOR MAC is the less calling of block cipher when generating a tag. Secondly, there is no limitation for the input length when using PMAC. 
 Another benefit brought by PMAC is that only one key is needed in generating the tag. Other processing operations include bit-level xor and gray code, which are cost-effective and fast processing. 
