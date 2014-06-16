@@ -166,10 +166,13 @@ stateless MAC schemes, which use only a key as secret information to process the
 input and generate the tag; and stateful MAC schemes, which adopt other secret
 information blocks(such as nonce in some designs) besides the key in input message
 processing and tag generation. In some research works, stateless MAC schemes are denoted as deterministic MAC schemes as for a fixed key, each input message is mapped to a tag, which for stateful MAC schemes the message can be mapped to different tags with variant values of nonce.
+The category of stateless and stateful MAC schemes was also mentioned in \cite{xor-mac}.
 
+%using fixed keys only for each input, the security is ensured by ek and design.
+%suffer replay attack
 \subsubsection{Stateless(Deterministic) MAC Schemes}
 For a deterministic MAC scheme, a secrete key is used in processing message M and generating the tag T. The deterministic MAC design works can be categorized to iterated MAC scheme and parallel MAC scheme.
-\paragraph{Iterated MAC Schemes}
+\paragraph{Iterated Stateless MAC Schemes}
 In iterated MAC scheme, the process of a block in message M relies on the output of the process of its previous block. On the other hand, a block in message M can be processed only after its previous block finishes processing. 
 \begin{figure}[htbp]
 \centering
@@ -178,51 +181,96 @@ In iterated MAC scheme, the process of a block in message M relies on the output
 \label{fig:CBC-mac}
 \end{figure}
 The research on iterated MAC schemes started from the original CBC-MAC expressed in Figure \ref{fig:CBC-mac}.
+%for each mac calling, the No. of input blocks should be fixed. Arbitrary No. of blks or No. of bits are both unsecure.
+%cbc-mac reference: ANSI X9.9
+%two problems:1. len of input must be k*n; 2. each input must has same num of blks
 \paragraph{Original CBC-MAC}
-The original CBC-MAC is a secure MAC if every input message has same number of blocks. One attack on original CBC-MAC is that the first input message contains a single block M, while the second input message contains two blocks M$\|$(M$\oplus$T). Assume the tag T of message M from CBC-MAC can be expressed as T = CBC-MAC$_k$(M), for another input M$\|$(M$\oplus$T), the tag T1=CBC-MAC(M$\|$(M$\oplus$T))=T. This attack indicates that the original CBC-MAC is vulnerable if the input length is not fixed.
+The concept of CBC-MAC was proposed in \cite{} and revised in 1986. The original CBC-MAC is a secure MAC if every input message has same number of blocks. If the number of blocks for two distinct inputs are different, CBC-MAC may produce two identical tags. One known attack on original CBC-MAC is that the first input message contains a single block M, while the second input message contains two blocks M and (M$\oplus$T). Assume the tag T of message M from CBC-MAC can be expressed as T = CBC-MAC$_k$(M), for another input (M, (M$\oplus$T)), the tag T1=CBC-MAC(M, (M$\oplus$T))=T. 
+
 Besides the vulnerability when the input length is not fixed, the original CBC-MAC scheme suffers birthday attack which means the adversary needs only 2$^{n/2}$ input queries to succeed a forgery. 
 
 Bellare et al. provided the first security evaluation on original CBC-MAC\cite{cbc1994}. The conclusion is that if the adversary A is allowed to conduct arbitrary fixed length queries for q time, the probability that A succeeds in a forgery after the queries can be expressed with the number of queries q and the upper bound of this probability is tight if the block cipher used in CBC-MAC show good randomness.  
-\paragraph{EMAC: CBC-MAC for Arbitrary Input Length}
-EMAC is a optimized version of original CBC-MAC providing security for arbitrary length inputs. In the EMAC scheme the original CBC-MAC is applied to process input blocks using key K1 and the result of original CBC-MAC is encrypted with a different key K2. 
-Petrank and Rackof provided the original security evaluation of EMAC in \cite{emac} showing that the EMAC is secure for arbitrary length inputs if the block cipher show good randomness. However, the EMAC still suffers the birthday attack.
 
-Hence the original CBC-MAC is vulnerable if the input length is not fixed, a class of MAC schemes named CMAC are developed to provide security for arbitrary length of inputs while do not require an additional encryption in each tag generation like what EMAC does. The structure of the variants of CMAC is modeled in Figure \ref{fig:CMAC}.
+%EMAC
+\begin{figure}[htbp]
+\centering
+\includegraphics[scale=0.5]{./diagrams/cmac.pdf}
+\caption{EMAC}
+\label{fig:EMAC}
+\end{figure}
+%even though the length of input to emac is not necessary to be idential for each calling, the length still should be k * n, k is int and n is blk len
+%contribute: address problem 1
+%adv1: the user of emac does not need to compute |M| before using
+\paragraph{EMAC: CBC-MAC for Arbitrary Number of Input Blocks}
+EMAC is a optimized version of original CBC-MAC providing security for arbitrary number of input blocks. EMAC was proposed in the report of RACE project in \cite{}. In the EMAC scheme the original CBC-MAC is applied to process input blocks using key K1 and produces a temporary output named T$_{tmp}$. T$_{tmp}$ is encrypted with a different key K2 and the output of encryption is the final tag T. EMAC does not limited the number of blocks for each input, while the num of bits of each input should divisible by the block block length n. The concept of EMAC is expressed in Figure $\ref{fig:EMAC}$ 
+
+Petrank and Rackof provided the original security evaluation of EMAC in \cite{emac} showing that the EMAC is secure for arbitrary number of input blocks if the block cipher shows good randomness. However, the EMAC still suffers the birthday attack, and the can not be applied to variant-length inputs.
+
+%FCBC
+\begin{figure}[htbp]
+\centering
+\includegraphics[scale=0.5]{./diagrams/cmac.pdf}
+\caption{FCBC}
+\label{fig:FCBC}
+\end{figure}
+\paragraph{FCBC: Optimized EMAC}
+FCBC was introduced in \cite{}.
+
+%XCBC
 \begin{figure}[htbp]
 \centering
 \includegraphics[scale=0.5]{./diagrams/cmac.pdf}
 \caption{The CMAC family}
-\label{fig:CMAC}
+\label{fig:XCBC}
 \end{figure}
+% optimize of emac, arbitrary length ecbc and less ek fcbc mentioned in \cite{xcbc}
+Hence the original CBC-MAC is vulnerable if the input length is not fixed, a class of MAC schemes named CMAC are developed to provide security for arbitrary length of inputs while do not require an additional encryption in each tag generation like what EMAC does. 
+%for cmac, the length of input can be arbitrary bits, not limited to k*n
+%contribution: address prob 1 and 2
 \paragraph{XCBC: Three Key Version of CMAC}
-Black and Rogaway introduced a optimized version of EMAC called XCBC in \cite{xcbc}.
-There are two motivations of XCBC scheme: providing security for arbitrary length input; eliminate unnecessary padding operation on the input blocks in EMAC.
+Black and Rogaway introduced the first version of CMAC called XCBC in \cite{xcbc}, which required three distinct keys to cover all types of inputs.
+There are two motivations of XCBC scheme: providing security for arbitrary length input; eliminate unnecessary padding operation on the input blocks in EMAC. The concept of XCBC scheme is expressed in Figure $\ref{fig:XCBC}$.
 
-The XCBC scheme is a refined version of original EMAC. The contributions of XCBC scheme compared with the EMAC are: the length of input message is not limited to the integer times of the length of block cipher input; the block ciphers used in processing m input blocks is m other than m+1 in EMAC; all the block cipher in XCBC share a same key, the additional two keys are used to do exclusively or operation with the final input block,this design has faster processing speed.   
+The contributions of XCBC scheme compared with the EMAC are: the length of input message is not limited to the integer times of the length of block cipher input; the block ciphers used in processing m input blocks is m other than m+1 in EMAC; all the block cipher in XCBC share a same key, the additional two keys are used to do XOR operation with the final input block. As one block cipher calling is eliminated, XCBC has performace advantage to EMAC.   
 
 Black and Rogaway provided a original security analysis based on computational approach of XCBC scheme in \cite{xcbc}. Their quantitative result was improved by Minematsu and Matsushima in \cite{new}. 
+
+%TMAC
+\begin{figure}[htbp]
+\centering
+\includegraphics[scale=0.5]{./diagrams/cmac.pdf}
+\caption{The CMAC family}
+\label{fig:TMAC}
+\end{figure}
 \paragraph{TMAC: Two Key Version of CMAC}
-Kurosawa and Iwata designed a optimized version of cmac requiring two different keys in \cite{tmac} named TMAC.  
-The two different keys used in processing the final input blocks in XCBC are replaced by a keyed hash function with two distinct constants as inputs. This optimization aims to reduce the key cost. 
+Kurosawa and Iwata designed a optimized version of CMAC named TMAC in \cite{tmac} requiring two different keys.  
+In TMAC,  the value used to XOR with the input of final block cipher calling is replaced from the secrete key k2 and k3 themselves to a hash value generated with k2. If the last input block has n bits, constant number c1 is used to generate the hash value, otherwise c2 is adopted. This optimization aims to reduce number of the keys in XCBC to reduce the key storage costs. 
 
 Kurosawa and Iwata provided an original security analysis on TMAC in \cite{tmac} showing that the same level of security was achieved by TMAC compared with XCBC. The original quantitative security conclusion of TMAC was improved by Minematsu and Matsushima in \cite{new}. 
+
+%OMAC
+\begin{figure}[htbp]
+\centering
+\includegraphics[scale=0.5]{./diagrams/cmac.pdf}
+\caption{The CMAC family}
+\label{fig:OMAC}
+\end{figure}
 \paragraph{OMAC: Single Key Version of CMAC}
-Iwata and Kurosawa introduced a optimization of original XCBC scheme with only one key, named OMAC in \cite{omac}. This key is used by the block cipher in the OMAC and the keyed hash function used in TMAC is replaced by a result of Galois field multiplication. OMAC is the variant of CMAC using the least number of keys. 
+Iwata and Kurosawa introduced a optimization of original XCBC scheme requiring only one key, named OMAC in \cite{omac}. This key is used by the block cipher in the OMAC and the keyed hash function used in TMAC is replaced by a result of Galois field multiplication. OMAC is the variant of CMAC using the least number of keys. 
+If the length of last input block is n bits, the input of last block cipher is XORed with L$\dot$u
 
 Iwata and Kurosawa provided an original security analysis on OMAC in \cite{omac}. This result have no optimized version yet.
+%other iterated mac
 \paragraph{Other Iterated MAC Designs}
 Daemen and Rijmen introduced a iterated MAC design named ALRED-MAC in \cite{alred}. The motivation of of this work is to provide a design with tighter upper bound in birthday paradox. 
-\paragraph{Parallel MAC Schemes}
-The motivation of designing MAC schemes in which input message blocks are processed in parallel is the latency of processing when using iterated MAC schemes. This latency becomes more obvious when run the scheme on processors supporting pipeline of parallelism. 
-In parallel MAC scheme, all the blocks in message M are processed in parallel. The output blocks of M processing are transformed to a single block B, then processed to generate tag T. 
-\paragraph{XOR MAC scheme}
-Bellare, Guerin and Rogaway introduced a parallel MAC scheme named XOR MAC in \cite{xor-mac}. 
-The parallel input processing makes the xor MAC faster the CBC-MAC. 
-In \cite{xor-mac}, the authors provided a quantitative security conclusion of xor mac that it is security under the security notion of message authentication system if the pseudorandom function used in the design is secure. The security bound of xor mac from \cite{xor-mac} expressed a tighter upper bound compared with the result of original CBC-MAC. 
 
-The main weakness of XOR mac is the cost of storage for additional input parameters. According the design of XOR mac, assume the input message is divided into m blocks and the length of each block is half of the length of block cipher input. Each input block has a index with domain as [1,m]. A input block is the concatenated with the encoder of its index(whose length is same as the input block) to form the input to a block cipher, for example (i$\|$M[i]). Besides the m concatenated input blocks, a nonce formed with random number or counter is used a input to the block cipher. Then the m+1 output blocks from block cipher is xored and the output block of XOR operation is concatenated with a random number or counter to form the final tag. 
-We can see that the length of tag from XOR-mac is the sum of the length of a output block from block cipher and the length of a random number or counter. This long-length MAC needs additional storage compared with the tag from iterated MAC schemes. 
-On the other hand, the nonce maintained by the user of XOR mac is regarded a disadvantage by some researchers.
+\paragraph{Parallel MAC Schemes}
+One performace weakness of iterated MAC schemes is that the processing of each input block relys on the complete of the processing of the previous block. This weakness leads to the latency of tag generation when the number of input blocks is large and becomes more and more obvious with fast development of parallel compting and multi-processor technology. 
+Facing this weakness, attempts have been made to design parallel MAC schemes. 
+In parallel MAC scheme, all the blocks in input message M are processed in parallel. The output blocks of M processing are transformed to a single block B, then processed to generate tag T. 
+
+%PMAC
+%xor mac scheme is a statefule parallel mac
 \begin{figure}[htbp]
 \centering
 \includegraphics[scale=0.5]{./diagrams/PMAC.pdf}
@@ -230,13 +278,17 @@ On the other hand, the nonce maintained by the user of XOR mac is regarded a dis
 \label{fig:PMAC}
 \end{figure}
 \paragraph{The Original PMAC}
-Black and Rogaway introduced an parallel MAC scheme named PMAC in \cite{pmac}. 
-The improvement of PMAC compared with XOR MAC is the less calling of block cipher when generating a tag. Secondly, there is no limitation for the input length when using PMAC. 
-Another benefit brought by PMAC is that only one key is needed in generating the tag. Other processing operations include bit-level xor and gray code, which are cost-effective and fast processing. 
+Black and Rogaway introduced a parallel MAC scheme named PMAC in \cite{pmac}.  
+The motivation of PMAC was to reduce the number of block cipher calling compared with XOR MAC, which is a stateful parallel MAC scheme introduced in \cite{}. 
+Another advantage of PMAC is that there is no limitation for the input length when using PMAC. 
+In PMAC only one key is needed in generating the tag. Before sent to block cipher, each input block is xored with a incrementing gray code. The concept of original PMAC scheme is expressed in Figure $\ref{fig:PMAC}$. 
 
 The quantitative security result of PMAC was acquired by Black and Rogaway in \cite{pmac}. They analysed the probability of internal collision in the arbitrary types of inputs and asserted that the PMAC design is a secure MAC if the block cipher used behaves like a pseudorandom permutation. In the proof from Black and Rogaway, the probability that an adversary can distinguish the PMAC from pseudorandom function is the probability that collision of internal blocks(the outputs of block cipher) plus the probability of tag collision. 
 
 Lee et al. posted attacks on the original PMAC in \cite{pmac_forgery}. Their research indicated that the original PMAC design did not bring advantage in security compared with iterated MACs. The original PMAC suffers from their birthday like attack and the key recover attack.
+
+%Tweakable PMAC
+%the purpose to replace original block cipher with tweakable block cipher
 \paragraph{Tweakable block cipher and Optimized PMAC}
 The concept of tweakable block cipher was formally defined by Liskov, Rivest, and Wagner in \cite{tweak}. Rogaway introduced a efficient implementation of tweakable block cipher in \cite{tweak_pmac}and adopt this implementation to replace the block cipher used in the original PMAC and OCB authenticated encryption mode.
 The application of tweakable block cipher in constructing PMAC can enhance the processing speed compared with original PMAC based on Grey code and simplify the structure of the scheme, which also simplify the security analysis of the scheme. 
@@ -246,13 +298,30 @@ Minematsu and Matsushima optimized this result in \cite{new}.
 
 The evaluation procedure in \cite{pmac} is questioned by the latter researchers hence the correlation between collision probability and 
 distinguishing probability was not explained . This issue was also pointed in Nandi`s improved analysis on PMAC in \cite{improve_pmac}. Nandi also provided a improved quantitative security result of PMAC which is smaller in all the cases than the one in \cite{pmac} and \cite{new}. 
-\paragraph{iPMAC}
+
+%iPMAC
+%the purpose of iPMAC
+\paragraph{iPMAC and its variants}
 Sarkar introduce an optimisation on original PMAC in \cite{iPMAC}. The galois field multiplication used in the tweakable block cipher introduced is replaced by a technique named tower field representation of Galois field. This replacement enhance the processing speed in software.
 
 Hence the structure of iPMAC is same as the original PMAC except the input masking stage, the security evaluation by the author in \cite{iPMAC} followed the approach in \cite{pmac}.
 
+%besides fixed keys, a nonce is applied to each input in tag generation.
+%replay attack can be defined if designed properly
 \subsubsection{Stateful MAC Schemes}
 Deterministic MAC schemes cannot defend against replay attack. The reason is that the secrete key used in generating the tag will not be refreshed for each message. If two message are identical, their tags are identical. To address this issue, nonce is introduced to the tag generation in a MAC scheme. A nonce is a short message block whose value will be updated by each message in tag generation. To update the value of nonce, the address of message, a random number, a counter or the combination of these three elements are adopted in the nonce generation for each message. With the nonce introduced, a well designed stately MAC scheme should be capable in defending type 2 attack in threat model.
+
+%XOR MAC
+\paragraph{XOR MAC scheme}
+Bellare, Guerin and Rogaway introduced a parallel MAC scheme named XOR MAC in \cite{xor-mac}. 
+The parallel input processing makes the xor MAC faster the CBC-MAC. 
+In \cite{xor-mac}, the authors provided a quantitative security conclusion of xor mac that it is security under the security notion of message authentication system if the pseudorandom function used in the design is secure. The security bound of xor mac from \cite{xor-mac} expressed a tighter upper bound compared with the result of original CBC-MAC. 
+
+The main weakness of XOR mac is the cost of storage for additional input parameters. According the design of XOR mac, assume the input message is divided into m blocks and the length of each block is half of the length of block cipher input. Each input block has a index with domain as [1,m]. A input block is the concatenated with the encoder of its index(whose length is same as the input block) to form the input to a block cipher, for example (i$\|$M[i]). Besides the m concatenated input blocks, a nonce formed with random number or counter is used a input to the block cipher. Then the m+1 output blocks from block cipher is xored and the output block of XOR operation is concatenated with a random number or counter to form the final tag. 
+We can see that the length of tag from XOR-mac is the sum of the length of a output block from block cipher and the length of a random number or counter. This long-length MAC needs additional storage compared with the tag from iterated MAC schemes. 
+On the other hand, the nonce maintained by the user of XOR mac is regarded a disadvantage by some researchers.
+
+%GMAC
 \paragraph{GMAC}
 McGrew and Viega introduced the Galois/Counter Mode authenticated encryption design and the original security analysis is provided in \cite{gcm}. The message authentication system in GCM(named GMAC) is a iterated scheme based on the concept of universal hashing. The block processing component used in GMAC is the Galois field multiplication other than the block cipher in deterministic MAC schemes. 
 The motivation of GCM is to design a scheme combining counter mode of operation(CTR) with a message authentication code(the GMAC) to form a efficient and secure authenticated encryption system.
@@ -315,6 +384,8 @@ The third step to evaluate the security of a MA system is analyzing the security
 
 Some MA systems are constructed based on authenticated-encryption schemes to
 provide protection on both confidentiality and integrity of data. The security analysis of integrity should also following the above three steps. 
+
+%add some other MA design papers with hash mac, umac or block cipher based macs
 \paragraph{Uni-processor MA Systems}
 In \cite{yan-MA}, Yan et al. proposed a MA design based on a variant of Galois/Counter Mode(GCM) authenticated encryption scheme proposed by McGrew and Viega in \cite{gcm}. A data block to be protected is spliced to several chunks each of whose length is same as the length of input to block cipher. For each chunk, a tuple(address, counter, random value(EIV)) is generated as chunk nonce for encryption. For the whole data block, a tuple (address of chunk 1, counter, random value 2(AIV)) is generated for tag generation. 
 In the design from Yan et al., the counter for a data block is formed by two parts: a long-length major counter(64 bits) concatenated with a short-length minor counter(no more than 8 bits). When the minor counter overflow, the major counter updates. For each data block, the counter is distinct. For each chunk in a data block, the address is distinct and the counter is same. The frequency of updating EIV depends on the security level required by the whole system.  In this way, the nonce for each chunk and the whole data block is update for each invocation of GCM scheme. As the security of GCM scheme has been systematically analyzed in \cite{gcm} and the security result was optimized by Iwata, Ohashi and Minematsu in \cite{breaking}, the design from Yan et al. is a secure design as the first two steps had been adopted.
