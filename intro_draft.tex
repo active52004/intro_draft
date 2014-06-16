@@ -160,6 +160,7 @@ security notion of MAC schemes in computational model to do manually analysis.
 
 \section{Related Works} 
 \subsection{MAC Schemes and Security Analysis}
+%stateless and stateful
 \paragraph{Stateless and Stateful MAC schemes}
 To our knowledge, existing MAC schemes can be classified to two categories:
 stateless MAC schemes, which use only a key as secret information to process the
@@ -168,11 +169,13 @@ information blocks(such as nonce in some designs) besides the key in input messa
 processing and tag generation. In some research works, stateless MAC schemes are denoted as deterministic MAC schemes as for a fixed key, each input message is mapped to a tag, which for stateful MAC schemes the message can be mapped to different tags with variant values of nonce.
 The category of stateless and stateful MAC schemes was also mentioned in \cite{xor-mac}.
 
+Deterministic MAC schemes cannot defend against replay attack. The reason is that the secrete key used in generating the tag will not be refreshed for each message. If two message are identical, their tags are identical. To address this issue, nonce is introduced to the tag generation in a MAC scheme. A nonce is a short message block whose value will be updated by each message in tag generation. To update the value of nonce, the address of message, a random number, a counter or the combination of these three elements are adopted in the nonce generation for each message. With the nonce introduced, a well designed stately MAC scheme should be capable in defending type 2 attack in threat model.
+
+%iterated and parallel
+\paragraph{Iterated and Parallel MAC Schemes}
 %using fixed keys only for each input, the security is ensured by ek and design.
 %suffer replay attack
-\subsubsection{Stateless(Deterministic) MAC Schemes}
-For a deterministic MAC scheme, a secrete key is used in processing message M and generating the tag T. The deterministic MAC design works can be categorized to iterated MAC scheme and parallel MAC scheme.
-\paragraph{Iterated Stateless MAC Schemes}
+%For a deterministic MAC scheme, a secrete key is used in processing message M and generating the tag T. The deterministic MAC design works can be categorized to iterated MAC scheme and parallel MAC scheme.
 In iterated MAC scheme, the process of a block in message M relies on the output of the process of its previous block. On the other hand, a block in message M can be processed only after its previous block finishes processing. 
 \begin{figure}[htbp]
 \centering
@@ -181,9 +184,17 @@ In iterated MAC scheme, the process of a block in message M relies on the output
 \label{fig:CBC-mac}
 \end{figure}
 The research on iterated MAC schemes started from the original CBC-MAC expressed in Figure \ref{fig:CBC-mac}.
+
+One performance weakness of iterated MAC schemes is that the processing of each input block relys on the complete of the processing of the previous block. This weakness leads to the latency of tag generation when the number of input blocks is large and becomes more and more obvious with fast development of parallel compting and multi-processor technology. 
+Facing this weakness, attempts have been made to design parallel MAC schemes. 
+In parallel MAC scheme, all the blocks in input message M are processed in parallel. The output blocks of M processing are transformed to a single block B, then processed to generate tag T. 
+
+%CBC-MAC
 %for each mac calling, the No. of input blocks should be fixed. Arbitrary No. of blks or No. of bits are both unsecure.
 %cbc-mac reference: ANSI X9.9
-%two problems:1. len of input must be k*n; 2. each input must has same num of blks
+%two problems:1. len of input must be k*n; 2. each input must has same num of
+%blks, the original cbc-mac did not give the rule of padding if the last block
+%length is not n
 \paragraph{Original CBC-MAC}
 The concept of CBC-MAC was proposed in \cite{} and revised in 1986. The original CBC-MAC is a secure MAC if every input message has same number of blocks. If the number of blocks for two distinct inputs are different, CBC-MAC may produce two identical tags. One known attack on original CBC-MAC is that the first input message contains a single block M, while the second input message contains two blocks M and (M$\oplus$T). Assume the tag T of message M from CBC-MAC can be expressed as T = CBC-MAC$_k$(M), for another input (M, (M$\oplus$T)), the tag T1=CBC-MAC(M, (M$\oplus$T))=T. 
 
@@ -192,6 +203,7 @@ Besides the vulnerability when the input length is not fixed, the original CBC-M
 Bellare et al. provided the first security evaluation on original CBC-MAC\cite{cbc1994}. The conclusion is that if the adversary A is allowed to conduct arbitrary fixed length queries for q time, the probability that A succeeds in a forgery after the queries can be expressed with the number of queries q and the upper bound of this probability is tight if the block cipher used in CBC-MAC show good randomness.  
 
 %EMAC
+%EMAC did not give the rule of padding if the last block is not n bits 
 \begin{figure}[htbp]
 \centering
 \includegraphics[scale=0.5]{./diagrams/cmac.pdf}
@@ -217,6 +229,8 @@ Petrank and Rackof provided the original security evaluation of EMAC in \cite{em
 FCBC was introduced in \cite{}.
 
 %XCBC
+%the length of input should be computed first, if the last block is not n bits,
+%padding the last block
 \begin{figure}[htbp]
 \centering
 \includegraphics[scale=0.5]{./diagrams/cmac.pdf}
@@ -236,6 +250,7 @@ The contributions of XCBC scheme compared with the EMAC are: the length of input
 Black and Rogaway provided a original security analysis based on computational approach of XCBC scheme in \cite{xcbc}. Their quantitative result was improved by Minematsu and Matsushima in \cite{new}. 
 
 %TMAC
+%same padding rule like xcbc
 \begin{figure}[htbp]
 \centering
 \includegraphics[scale=0.5]{./diagrams/cmac.pdf}
@@ -249,6 +264,7 @@ In TMAC,  the value used to XOR with the input of final block cipher calling is 
 Kurosawa and Iwata provided an original security analysis on TMAC in \cite{tmac} showing that the same level of security was achieved by TMAC compared with XCBC. The original quantitative security conclusion of TMAC was improved by Minematsu and Matsushima in \cite{new}. 
 
 %OMAC
+%same padding way like xcbc
 \begin{figure}[htbp]
 \centering
 \includegraphics[scale=0.5]{./diagrams/cmac.pdf}
@@ -260,14 +276,38 @@ Iwata and Kurosawa introduced a optimization of original XCBC scheme requiring o
 If the length of last input block is n bits, the input of last block cipher is XORed with L$\dot$u
 
 Iwata and Kurosawa provided an original security analysis on OMAC in \cite{omac}. This result have no optimized version yet.
+
+%besides fixed keys, a nonce is applied to each input in tag generation.
+%replay attack can be defined if designed properly
+
+%GMAC
+\paragraph{GMAC}
+McGrew and Viega introduced the Galois/Counter Mode authenticated encryption design and the original security analysis is provided in \cite{gcm}. The message authentication system in GCM(named GMAC) is a iterated scheme based on the concept of universal hashing. The block processing component used in GMAC is the Galois field multiplication other than the block cipher in deterministic MAC schemes. 
+The motivation of GCM is to design a scheme combining counter mode of operation(CTR) with a message authentication code(the GMAC) to form a efficient and secure authenticated encryption system.
+One advantage of adopting the Galois field multiplication in GMAC is that it can be made easily in hardware and has efficient performance in software. 
+
+In the security analysis of GCM from McGrew and Viega, the GMAC was not discussed alone. The security of GMAC as a message authentication code is based on the fact that the encryption part in GCM is secure and the collision probability of ciphertext blocks is low. 
+In GCM design, the nonce is called initialization vector (IV). For each invocation of GCM, the IV should be distinct.
+
+In \cite{breaking}, Iwata, Ohashi and Minematsu provided an optimised analysis for the security of GCM. They pointed out the weakness in the lemma used in forming the bound of the quantitative result of security for GCM with a counter example. This counter example was developed to a distinguishing attack on GCM. Iwata et al. then provided a approach fixing the problem of original lemma and provided the new quantitative security result of GCM. 
+
+In \cite{Rogaway2011}, Rogaway pointed the weakness of GMAC as a MAC scheme when used alone that the security under adaptive chosen-message attack is not as good as the security of deterministic MAC schemes. On the other hand, GMAC requires the nonce for tag generation and this nonce should be maintained and refreshed by the user of GMAC. The potential issue of this design pointed by Rogaway is the reuse of nonce, which may lead to the collision of the tag. 
+
+Handschuh and Preneel introduced key-recovery attacks on universal hash function based MAC algorithms in \cite{key_recover}. They introduced two types of attacks: weak key finding and partial information leaks.
 %other iterated mac
 \paragraph{Other Iterated MAC Designs}
 Daemen and Rijmen introduced a iterated MAC design named ALRED-MAC in \cite{alred}. The motivation of of this work is to provide a design with tighter upper bound in birthday paradox. 
 
 \paragraph{Parallel MAC Schemes}
-One performace weakness of iterated MAC schemes is that the processing of each input block relys on the complete of the processing of the previous block. This weakness leads to the latency of tag generation when the number of input blocks is large and becomes more and more obvious with fast development of parallel compting and multi-processor technology. 
-Facing this weakness, attempts have been made to design parallel MAC schemes. 
-In parallel MAC scheme, all the blocks in input message M are processed in parallel. The output blocks of M processing are transformed to a single block B, then processed to generate tag T. 
+%XOR MAC
+\paragraph{XOR MAC scheme}
+Bellare, Guerin and Rogaway introduced a parallel MAC scheme named XOR MAC in \cite{xor-mac}. 
+The parallel input processing makes the xor MAC faster the CBC-MAC. 
+In \cite{xor-mac}, the authors provided a quantitative security conclusion of xor mac that it is security under the security notion of message authentication system if the pseudorandom function used in the design is secure. The security bound of xor mac from \cite{xor-mac} expressed a tighter upper bound compared with the result of original CBC-MAC. 
+
+The main weakness of XOR mac is the cost of storage for additional input parameters. According the design of XOR mac, assume the input message is divided into m blocks and the length of each block is half of the length of block cipher input. Each input block has a index with domain as [1,m]. A input block is the concatenated with the encoder of its index(whose length is same as the input block) to form the input to a block cipher, for example (i$\|$M[i]). Besides the m concatenated input blocks, a nonce formed with random number or counter is used a input to the block cipher. Then the m+1 output blocks from block cipher is xored and the output block of XOR operation is concatenated with a random number or counter to form the final tag. 
+We can see that the length of tag from XOR-mac is the sum of the length of a output block from block cipher and the length of a random number or counter. This long-length MAC needs additional storage compared with the tag from iterated MAC schemes. 
+On the other hand, the nonce maintained by the user of XOR mac is regarded a disadvantage by some researchers.
 
 %PMAC
 %xor mac scheme is a statefule parallel mac
@@ -305,36 +345,6 @@ distinguishing probability was not explained . This issue was also pointed in Na
 Sarkar introduce an optimisation on original PMAC in \cite{iPMAC}. The galois field multiplication used in the tweakable block cipher introduced is replaced by a technique named tower field representation of Galois field. This replacement enhance the processing speed in software.
 
 Hence the structure of iPMAC is same as the original PMAC except the input masking stage, the security evaluation by the author in \cite{iPMAC} followed the approach in \cite{pmac}.
-
-%besides fixed keys, a nonce is applied to each input in tag generation.
-%replay attack can be defined if designed properly
-\subsubsection{Stateful MAC Schemes}
-Deterministic MAC schemes cannot defend against replay attack. The reason is that the secrete key used in generating the tag will not be refreshed for each message. If two message are identical, their tags are identical. To address this issue, nonce is introduced to the tag generation in a MAC scheme. A nonce is a short message block whose value will be updated by each message in tag generation. To update the value of nonce, the address of message, a random number, a counter or the combination of these three elements are adopted in the nonce generation for each message. With the nonce introduced, a well designed stately MAC scheme should be capable in defending type 2 attack in threat model.
-
-%XOR MAC
-\paragraph{XOR MAC scheme}
-Bellare, Guerin and Rogaway introduced a parallel MAC scheme named XOR MAC in \cite{xor-mac}. 
-The parallel input processing makes the xor MAC faster the CBC-MAC. 
-In \cite{xor-mac}, the authors provided a quantitative security conclusion of xor mac that it is security under the security notion of message authentication system if the pseudorandom function used in the design is secure. The security bound of xor mac from \cite{xor-mac} expressed a tighter upper bound compared with the result of original CBC-MAC. 
-
-The main weakness of XOR mac is the cost of storage for additional input parameters. According the design of XOR mac, assume the input message is divided into m blocks and the length of each block is half of the length of block cipher input. Each input block has a index with domain as [1,m]. A input block is the concatenated with the encoder of its index(whose length is same as the input block) to form the input to a block cipher, for example (i$\|$M[i]). Besides the m concatenated input blocks, a nonce formed with random number or counter is used a input to the block cipher. Then the m+1 output blocks from block cipher is xored and the output block of XOR operation is concatenated with a random number or counter to form the final tag. 
-We can see that the length of tag from XOR-mac is the sum of the length of a output block from block cipher and the length of a random number or counter. This long-length MAC needs additional storage compared with the tag from iterated MAC schemes. 
-On the other hand, the nonce maintained by the user of XOR mac is regarded a disadvantage by some researchers.
-
-%GMAC
-\paragraph{GMAC}
-McGrew and Viega introduced the Galois/Counter Mode authenticated encryption design and the original security analysis is provided in \cite{gcm}. The message authentication system in GCM(named GMAC) is a iterated scheme based on the concept of universal hashing. The block processing component used in GMAC is the Galois field multiplication other than the block cipher in deterministic MAC schemes. 
-The motivation of GCM is to design a scheme combining counter mode of operation(CTR) with a message authentication code(the GMAC) to form a efficient and secure authenticated encryption system.
-One advantage of adopting the Galois field multiplication in GMAC is that it can be made easily in hardware and has efficient performance in software. 
-
-In the security analysis of GCM from McGrew and Viega, the GMAC was not discussed alone. The security of GMAC as a message authentication code is based on the fact that the encryption part in GCM is secure and the collision probability of ciphertext blocks is low. 
-In GCM design, the nonce is called initialization vector (IV). For each invocation of GCM, the IV should be distinct.
-
-In \cite{breaking}, Iwata, Ohashi and Minematsu provided an optimised analysis for the security of GCM. They pointed out the weakness in the lemma used in forming the bound of the quantitative result of security for GCM with a counter example. This counter example was developed to a distinguishing attack on GCM. Iwata et al. then provided a approach fixing the problem of original lemma and provided the new quantitative security result of GCM. 
-
-In \cite{Rogaway2011}, Rogaway pointed the weakness of GMAC as a MAC scheme when used alone that the security under adaptive chosen-message attack is not as good as the security of deterministic MAC schemes. On the other hand, GMAC requires the nonce for tag generation and this nonce should be maintained and refreshed by the user of GMAC. The potential issue of this design pointed by Rogaway is the reuse of nonce, which may lead to the collision of the tag. 
-
-Handschuh and Preneel introduced key-recovery attacks on universal hash function based MAC algorithms in \cite{key_recover}. They introduced two types of attacks: weak key finding and partial information leaks.
 
 \subsection{Authentication-Encryption Schemes and Security Analysis}
 After various kind of MAC schemes were evaluated and claimed to be secure, a new cryptosystem, the Authenticated Encryption(AE) was introduced The Authenticated to combine the encryption of
