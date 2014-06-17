@@ -209,7 +209,7 @@ Bellare et al. provided the first security evaluation on original CBC-MAC\cite{c
 %EMAC did not give the rule of padding if the last block is not n bits 
 \begin{figure}[htbp]
 \centering
-\includegraphics[scale=0.5]{./diagrams/cmac.pdf}
+\includegraphics[scale=0.5]{./diagrams/emac.pdf}
 \caption{EMAC}
 \label{fig:EMAC}
 \end{figure}
@@ -222,26 +222,23 @@ EMAC is a optimized version of original CBC-MAC providing security for arbitrary
 Petrank and Rackof provided the original security evaluation of EMAC in \cite{emac} showing that the EMAC is secure for arbitrary number of input blocks if the block cipher shows good randomness. However, the EMAC still suffers the birthday attack.
 
 %FCBC
-\begin{figure}[htbp]
-\centering
-\includegraphics[scale=0.5]{./diagrams/cmac.pdf}
-\caption{FCBC}
-\label{fig:FCBC}
-\end{figure}
-\paragraph{FCBC: Optimized EMAC}
-FCBC was introduced in \cite{}.
+%paragraph{FCBC: Optimized EMAC}
+%FCBC was introduced in \cite{}.
 
 %XCBC
 %the length of input should be computed first, if the last block is not n bits,
 %padding the last block
 \begin{figure}[htbp]
 \centering
-\includegraphics[scale=0.5]{./diagrams/cmac.pdf}
-\caption{The CMAC family}
+\includegraphics[scale=0.5]{./diagrams/xcbc-nopadding.pdf}
+\caption{XCBC-MAC no padding}
+\centering
+\includegraphics[scale=0.5]{./diagrams/xcbc-padding.pdf}
+\caption{XCBC-MAC padding}
 \label{fig:XCBC}
 \end{figure}
 % optimize of emac, arbitrary length ecbc and less ek fcbc mentioned in \cite{xcbc}
-CMAC(Cipher based MAC) is another variant of original CBC-MAC. The motivation of CMAC is two weakness existing in EMAC:
+CMAC(Cipher based MAC) is another variant of original CBC-MAC. The motivation of CMAC origins from two weaknesses existing in EMAC:
 \begin{itemize}
 	\item The length of input must be dividible to block length n
 	%padding only when last block lenght is less than n
@@ -263,8 +260,10 @@ Black and Rogaway provided a original security analysis based on computational a
 %same padding rule like xcbc
 \begin{figure}[htbp]
 \centering
-\includegraphics[scale=0.5]{./diagrams/cmac.pdf}
-\caption{The CMAC family}
+\includegraphics[scale=0.5]{./diagrams/tmac_nopadding.pdf}
+\caption{TMAC: no padding}
+\includegraphics[scale=0.5]{./diagrams/tmac_padding.pdf}
+\caption{TMAC: padding}
 \label{fig:TMAC}
 \end{figure}
 \paragraph{TMAC: Two Key Version of CMAC}
@@ -277,8 +276,10 @@ Kurosawa and Iwata provided an original security analysis on TMAC in \cite{tmac}
 %same padding way like xcbc
 \begin{figure}[htbp]
 \centering
-\includegraphics[scale=0.5]{./diagrams/cmac.pdf}
-\caption{The CMAC family}
+\includegraphics[scale=0.5]{./diagrams/omac_nopadding.pdf}
+\caption{OMAC: no padding}
+\includegraphics[scale=0.5]{./diagrams/omac_padding.pdf}
+\caption{OMAC: padding}
 \label{fig:OMAC}
 \end{figure}
 \paragraph{OMAC: Single Key Version of CMAC}
@@ -312,6 +313,12 @@ Handschuh and Preneel introduced key-recovery attacks on universal hash function
 Daemen and Rijmen introduced a iterated MAC design named ALRED-MAC in \cite{alred}. The motivation of of this work is to provide a design with tighter upper bound in birthday paradox. Yuan et al. analyzed the security of ALRED-MAC and proved its weakness under birthday attack in \cite{}. 
 
 \subsubsection{Parallel MAC Schemes}
+\begin{figure}[htbp]
+\centering
+\includegraphics[scale=0.5]{./diagrams/XOR-MAC.pdf}
+\caption{XOR MAC}
+\label{fig:XOR-MAC}
+\end{figure}
 %XOR MAC
 \paragraph{XOR MAC scheme}
 Bellare, Guerin and Rogaway introduced a parallel MAC scheme named XOR MAC in \cite{xor-mac}. 
@@ -330,6 +337,12 @@ The main weakness of XOR mac is the cost of storage for additional input paramet
 We can see that the length of tag from XOR-mac is the sum of the length of a output block from block cipher and the length of a random number or counter. This long-length MAC needs additional storage compared with the tag from iterated MAC schemes. 
 On the other hand, the nonce maintained by the user of XOR mac is regarded a disadvantage by some researchers.
 
+\begin{figure}[htbp]
+\centering
+\includegraphics[scale=0.5]{./diagrams/xecb-mac.pdf}
+\caption{XECB MAC}
+\label{fig:XECB-MAC}
+\end{figure}
 %XECB-MAC
 \paragraph{XECB-MAC: optimized XOR MAC}
 The main weakness of XOR MAC is that each block cipher calling encrypts only n/2 bits of input. This property doubled the num of block cipher calling in tag generation compared with iterated MAC schemes. To address this problem, Gligor and Donescu introduced an optimization named XECB-MAC in \cite{}. In XECB-MAC design, each block cipher calling will encrypt the output of the equation M$_i$ + i * nonce, where i is the input block index and M$_i$ is the ith input block. Nonce is the encryption of a nonce input, such as a random number of a incrementing counter. Marking the output of encrypting M$_i$ + i * Nonce, the tag is generated as T = E$_k$(z0) $\oplus$$sum_{i=1}^{m}$($\oplus$E$_k$(M$_i$ + i * Nonce)) , where $sum_{i=1}^{m}$$\oplus$ represent the result of xoring m blocks and z0 is the encryption of a simple function of nonce input. The tag and the nonce input are concatenated as the final tag and transfer with the input data. 
@@ -368,8 +381,10 @@ Lee et al. posted attacks on the original PMAC in \cite{pmac_forgery}. Their res
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[scale=0.5]{./diagrams/PMAC.pdf}
-\caption{PMAC based on Tweakable Block Cipher}
+\includegraphics[scale=0.5]{./diagrams/tweak_blk.pdf}
+\caption{Tweakable Block Cipher}
+\includegraphics[scale=0.3]{./diagrams/tweak_pmac.pdf}
+\caption{Tweakable Block Cipher}
 \label{fig:Tweak-PMAC}
 \end{figure}
 %Tweakable PMAC
@@ -377,12 +392,7 @@ Lee et al. posted attacks on the original PMAC in \cite{pmac_forgery}. Their res
 \paragraph{Tweakable block cipher and Optimized PMAC}
 %what is the benifits of tweakable compared with original block cipher?
 The concept of tweakable block cipher was formally defined by Liskov, Rivest, and Wagner in \cite{tweak}, converting the block cipher from using only one secret information key to two blocks Key and a tweak. The tweak is supplied by the caller of block cipher. 
-\begin{figure}[htbp]
-\centering
-\includegraphics[scale=0.5]{./diagrams/PMAC.pdf}
-\caption{PMAC based on Tweakable Block Cipher}
-\label{fig:Tweak-blk}
-\end{figure}
+
 Rogaway introduced a efficient implementation of tweakable block cipher in \cite{tweak_pmac}and adopted this implementation to replace the block cipher used in the original PMAC and OCB authenticated encryption mode. The concept of Rogaway`s tweakable block cipher is expressed in Figure $\ref{fig:Tweak-blk}$.
 
 The advantage introduced by constructing PMAC with tweakable block cipher include easier implementation and simpler security analysis. In tweakable based PMAC, input block processing is packaged into a tweakable block cipher. This packaged processing simplify the structure of PMAC compared with the original one in which a input block is processed by xoring with r$_i$$\cdot$L then encryption. This simplication of structure also reduces the complexity of computational based security analysis on PMAC.  The concept of PMAC based on tweakable block cipher is expressed in Figure $\ref{fig:Tweak-PMAC}$.
