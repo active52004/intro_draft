@@ -681,14 +681,15 @@ url = {http://dx.doi.org/10.1109/SP.2006.1},
 volume = {2006},
 year = {2006}
 }
-
-@inproceedings{dolev-yao,
+@article{dolev-yao,
   title={On the security of public key protocols},
-  author={Dolev, D and Yao, AC},
-  booktitle={2013 IEEE 54th Annual Symposium on Foundations of Computer Science},
-  pages={350--357},
-  year={1981},
-  organization={IEEE}
+  author={Dolev, Danny and Yao, Andrew C},
+  journal={Information Theory, IEEE Transactions on},
+  volume={29},
+  number={2},
+  pages={198--208},
+  year={1983},
+  publisher={IEEE}
 }
 
 @inproceedings{com-indis-log,

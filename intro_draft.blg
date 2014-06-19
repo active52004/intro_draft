@@ -1,57 +1,54 @@
-This is BibTeX, Version 0.99dThe top-level auxiliary file: intro_draft.aux
+This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: intro_draft.aux
 The style file: plain.bst
-I couldn't open database file tag_paper.bib.bib
----line 153 of file intro_draft.aux
- : \bibdata{tag_paper.bib
- :                       }
-I'm skipping whatever remains of this command
-I found no database files---while reading file intro_draft.aux
-Warning--I didn't find a database entry for "cetd"
-Warning--I didn't find a database entry for "Dolev-Yao"
-Warning--I didn't find a database entry for "symbolic-mac"
-Warning--I didn't find a database entry for "symbolic-kerberos"
-Warning--I didn't find a database entry for "computational-kerberos"
-Warning--I didn't find a database entry for "symbolic-survey"
-Warning--I didn't find a database entry for "Rogaway2011"
-Warning--I didn't find a database entry for "cbc1994"
-Warning--I didn't find a database entry for "signature"
-Warning--I didn't find a database entry for "prf"
-Warning--I didn't find a database entry for "goldwasser1984probabilistic"
-Warning--I didn't find a database entry for "yao1982theory"
-Warning--I didn't find a database entry for "shoup2000using"
-Warning--I didn't find a database entry for "bellare1990new"
-Warning--I didn't find a database entry for "kilian1996protect"
-Warning--I didn't find a database entry for "code-game"
-Warning--I didn't find a database entry for "yasuda2011new"
-Warning--I didn't find a database entry for "blanchet2006automated"
-Warning--I didn't find a database entry for "xor-mac"
-Warning--I didn't find a database entry for "emac"
-Warning--I didn't find a database entry for "xcbc"
-Warning--I didn't find a database entry for "new"
-Warning--I didn't find a database entry for "tmac"
-Warning--I didn't find a database entry for "omac"
-Warning--I didn't find a database entry for "gcm"
-Warning--I didn't find a database entry for "breaking"
-Warning--I didn't find a database entry for "key_recover"
-Warning--I didn't find a database entry for "alred"
-Warning--I didn't find a database entry for "pmac"
-Warning--I didn't find a database entry for "pmac_forgery"
-Warning--I didn't find a database entry for "tweak"
-Warning--I didn't find a database entry for "tweak_pmac"
-Warning--I didn't find a database entry for "improve_pmac"
-Warning--I didn't find a database entry for "iPMAC"
-Warning--I didn't find a database entry for "ae-notion"
-Warning--I didn't find a database entry for "aead"
-Warning--I didn't find a database entry for "ccm"
-Warning--I didn't find a database entry for "eax"
-Warning--I didn't find a database entry for "ocb"
-Warning--I didn't find a database entry for "fast"
-Warning--I didn't find a database entry for "cycle"
-Warning--I didn't find a database entry for "attack_blk"
-Warning--I didn't find a database entry for "hardware_attack"
-Warning--I didn't find a database entry for "area"
-Warning--I didn't find a database entry for "yan-MA"
-Warning--I didn't find a database entry for "pc-ice"
-Warning--I didn't find a database entry for "rogers-MA"
-Warning--I didn't find a database entry for "vaslin-MA"
-(There were 2 error messages)
+Database file #1: tag_paper.bib.bib
+Repeated entry---line 909 of file tag_paper.bib.bib
+ : @inproceedings{Dolev-Yao
+ :                         ,
+I'm skipping whatever remains of this entry
+Warning--can't use both volume and number fields in cbc1994
+Warning--empty journal in Rogaway2011
+Warning--empty journal in cbc-mac
+You've used 52 entries,
+            2118 wiz_defined-function locations,
+            802 strings with 14398 characters,
+and the built_in function-call counts, 22452 in all, are:
+= -- 2360
+> -- 844
+< -- 38
++ -- 332
+- -- 279
+* -- 1426
+:= -- 3327
+add.period$ -- 167
+call.type$ -- 52
+change.case$ -- 294
+chr.to.int$ -- 0
+cite$ -- 55
+duplicate$ -- 1000
+empty$ -- 1836
+format.name$ -- 279
+if$ -- 5032
+int.to.chr$ -- 0
+int.to.str$ -- 52
+missing$ -- 51
+newline$ -- 263
+num.names$ -- 106
+pop$ -- 380
+preamble$ -- 1
+purify$ -- 242
+quote$ -- 0
+skip$ -- 803
+stack$ -- 0
+substring$ -- 1702
+swap$ -- 394
+text.length$ -- 38
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 208
+warning$ -- 3
+while$ -- 237
+width$ -- 54
+write$ -- 597
+(There was 1 error message)

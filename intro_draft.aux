@@ -6,7 +6,7 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.3}Results: found security weakness, security optimization and results for optimized design }{2}}
 \@writefile{toc}{\contentsline {section}{\numberline {2}Preliminary: Formal Approaches of Security Analysis}{2}}
 \@writefile{toc}{\contentsline {paragraph}{Threat Model of Data Integrity}{2}}
-\citation{Dolev-Yao}
+\citation{dolev-yao}
 \citation{symbolic-mac}
 \citation{symbolic-kerberos}
 \@writefile{toc}{\contentsline {paragraph}{Formal Approaches on Security Analysis}{3}}
@@ -45,6 +45,7 @@
 \@writefile{toc}{\contentsline {section}{\numberline {3}Related Works}{7}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1}MAC Schemes and Security Analysis}{7}}
 \@writefile{toc}{\contentsline {paragraph}{Stateless and Stateful MAC schemes}{7}}
+\citation{cbc-mac}
 \@writefile{toc}{\contentsline {paragraph}{Iterated and Parallel MAC Schemes}{8}}
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces The Original CBC-MAC\relax }}{8}}
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
@@ -52,6 +53,7 @@
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.1}Iterated MAC Schemes}{8}}
 \@writefile{toc}{\contentsline {paragraph}{Original CBC-MAC}{8}}
 \citation{cbc1994}
+\citation{race}
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces EMAC\relax }}{9}}
 \newlabel{fig:EMAC}{{2}{9}}
 \@writefile{toc}{\contentsline {paragraph}{EMAC: CBC-MAC for Arbitrary Number of Input Blocks}{9}}
@@ -80,6 +82,7 @@
 \citation{Rogaway2011}
 \citation{key_recover}
 \citation{alred}
+\citation{yuan2009new}
 \@writefile{toc}{\contentsline {paragraph}{OMAC: Single Key Version of CMAC}{13}}
 \@writefile{toc}{\contentsline {paragraph}{GMAC}{13}}
 \citation{xor-mac}
@@ -90,15 +93,17 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces XOR MAC\relax }}{14}}
 \newlabel{fig:XOR-MAC}{{9}{14}}
 \@writefile{toc}{\contentsline {paragraph}{XOR MAC scheme}{14}}
+\citation{gligor2002fast}
 \@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces XECB MAC\relax }}{15}}
 \newlabel{fig:XECB-MAC}{{10}{15}}
 \@writefile{toc}{\contentsline {paragraph}{XECB-MAC: optimized XOR MAC}{15}}
+\citation{gligor2002fast}
 \citation{pmac}
 \@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces The Original PMAC\relax }}{16}}
 \newlabel{fig:PMAC}{{11}{16}}
 \citation{pmac}
 \citation{pmac_forgery}
-\citation{tweak}
+\citation{liskov2002tweakable}
 \citation{tweak_pmac}
 \citation{tweak_pmac}
 \citation{tweak_pmac}
@@ -123,7 +128,7 @@
 \citation{gcm}
 \citation{breaking}
 \citation{ocb}
-\citation{tweak}
+\citation{tweak_pmac}
 \citation{iPMAC}
 \citation{fast}
 \citation{cycle}
@@ -132,12 +137,12 @@
 \@writefile{toc}{\contentsline {paragraph}{Other PMAC variants}{19}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Authentication-Encryption Schemes and Security Analysis}{19}}
 \@writefile{toc}{\contentsline {paragraph}{Attacking the Authentication Systems}{19}}
-\citation{area}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Memory Integrity Protection Designs}{20}}
 \@writefile{toc}{\contentsline {paragraph}{Concepts of Memory Integrity Protection}{20}}
 \@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces The Concept of MA System\relax }}{20}}
 \newlabel{fig:ma_system}{{14}{20}}
 \@writefile{toc}{\contentsline {paragraph}{Security Evaluation for MA Systems}{20}}
+\citation{area}
 \citation{yan-MA}
 \citation{gcm}
 \citation{gcm}
@@ -151,3 +156,55 @@
 \citation{area}
 \bibstyle{plain}
 \bibdata{tag_paper.bib}
+\bibcite{symbolic-kerberos}{1}
+\bibcite{symbolic-mac}{2}
+\bibcite{xor-mac}{3}
+\bibcite{cbc1994}{4}
+\bibcite{ae-notion}{5}
+\bibcite{eax}{6}
+\bibcite{bellare1990new}{7}
+\bibcite{code-game}{8}
+\bibcite{race}{9}
+\bibcite{xcbc}{10}
+\bibcite{pmac}{11}
+\bibcite{blanchet2006automated}{12}
+\bibcite{computational-kerberos}{13}
+\bibcite{symbolic-survey}{14}
+\bibcite{alred}{15}
+\bibcite{dolev-yao}{16}
+\bibcite{pc-ice}{17}
+\bibcite{area}{18}
+\bibcite{gligor2002fast}{19}
+\bibcite{prf}{20}
+\bibcite{signature}{21}
+\bibcite{goldwasser1984probabilistic}{22}
+\bibcite{key_recover}{23}
+\bibcite{cetd}{24}
+\bibcite{omac}{25}
+\bibcite{breaking}{26}
+\bibcite{ccm}{27}
+\bibcite{fast}{28}
+\bibcite{kilian1996protect}{29}
+\bibcite{hardware_attack}{30}
+\bibcite{tmac}{31}
+\bibcite{pmac_forgery}{32}
+\bibcite{liskov2002tweakable}{33}
+\bibcite{gcm}{34}
+\bibcite{new}{35}
+\bibcite{improve_pmac}{36}
+\bibcite{emac}{37}
+\bibcite{aead}{38}
+\bibcite{tweak_pmac}{39}
+\bibcite{Rogaway2011}{40}
+\bibcite{ocb}{41}
+\bibcite{rogers-MA}{42}
+\bibcite{cycle}{43}
+\bibcite{iPMAC}{44}
+\bibcite{shoup2000using}{45}
+\bibcite{vaslin-MA}{46}
+\bibcite{cbc-mac}{47}
+\bibcite{yan-MA}{48}
+\bibcite{yao1982theory}{49}
+\bibcite{yasuda2011new}{50}
+\bibcite{attack_blk}{51}
+\bibcite{yuan2009new}{52}
