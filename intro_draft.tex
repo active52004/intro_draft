@@ -22,6 +22,23 @@ In this article, we will show that from the viewpoint of computational model bas
 \subsection{Results: found security weakness, security optimization and results for optimized design }
 
 \section{Preliminary: Formal Approaches of Security Analysis}
+Since 1980s, two formal approaches have been developed for analyzing the
+security protocols. "Formal" means the security notions for a type of protocols
+is general to all designs and the security analysis result of each design in a
+kind of approach should be in the same format. One approach is named
+"computational model"in some research works. The computational model based
+approaches quantify the security of a protocol with probability. The adversary
+in computational model cannot acquire the secret information stored in trust
+area while has no other limitation in breaking the protocol. 
+
+The other type of formal approach adopted in security analysis is named
+"symbolic model" in some research works. The cryptographic primitives used in
+the construction of protocol are assumed to be black box and the adversary can
+not predict the output of crypto-primitive without knowing the secret
+information. Each primitive is modeled to a symbol and represented as a string.
+The protocol can be represented with the symbols to form a sequence of strings
+and the security result of a protocol has only two options: security or insecure.  
+
 \paragraph{Threat Model of Data Integrity}
 We use processor-memory system to explain the threat and protection on the integrity of message blocks in transmission. 
 In the scenario of processor-memory architecture, data integrity refers to maintaining the data on the transmission outside the chip and stored on off-chip memory untampered. If the data stored on off-chip memory , or some external data injected to the system S, we can say that the data integrity of S is attacked. If the system S can not examine the tampered data or injected data, the attack is assumed to be successful. According to our knowledge, there are two aspects of attacks on data integrity:
@@ -29,7 +46,6 @@ In the scenario of processor-memory architecture, data integrity refers to maint
 	\item Introducing new content: The content of data in the system is modified, or data construct by the attacker is inserted to the system.
 	\item Replacing data with valid copy: The data D in transmission or on the memory is replace with the following two types of copy: A copy of D at an old time point or a copy of other data from different memory address.
 \end{enumerate}
-
 
 When the processor writes a data block D to the memory, MAC scheme computes a tag  and concatenate the tag with D forming a data-tag pair. The data-tag pair is sent to the frame on off-chip memory with address ADDR for storage.
 When the processor reads a data from the frame of ADDR, the data-pair is sent to the chip and to MAC scheme. Assume the data part in the pair read is D1 and tag part is T1. MAC scheme compute a tag T2 using D1 and T2 is compared with T1. If T1 is identical to T2, D1 is assumed to be untampered.
@@ -43,9 +59,6 @@ Assume the data-tag pair stored on the off-chip memory with address ADDR is mark
 \end{enumerate}
 If a MAC scheme is capable to defend the 1st and 2nd attacks in the list, it should ensure that for any two distinct data D1 and D2, the corresponding tag T1 and T2 should be two random message blocks. If this scheme is capable to defend the 3rd and 4th attacks too, it should ensure for any two identical data blocks D1 and D2 that are written to memory on different time or to different addresses, their tags T1 and T2 should be randomly generated.
 
-\paragraph{Formal Approaches on Security Analysis}
-Since 1980s, two formal approaches have been developed for analyzing the security protocols. "Formal" means means the security notions for a type of protocols is general to all designs and the result of each design in a kind of approach should be in the same format. One approach is named "computational model"in some research works. The computational model based approaches quantify the security of a protocol with probability and complexity. The adversary in computational model cannot acquire the secret information stored in trust area while has no other limitation in breaking the protocol. The security results acquired with computational model based approaches represent attack situations in real world. The weakness of computational model includes manually evaluation in most cases and error-prone. 
-The other formal approach adopted in security analysis is named "symbolic model" in some research works. The cryptographic primitives used in the construction of protocol are assumed to be black box and the adversary can not predict the output of crypto-primitive without knowing the secret information. Each primitive is modeled to a term and represented as a string. The protocol can be represented with the terms to form a sequence of strings and the security result of a protocol has two options: security or insecure.  
 \subsection{Symbolic Model based Security Analysis}
 Dolev and Yao introduced \cite{dolev-yao} a evaluation mechanism for analyzing the security of cryptographic protocol in
 symbolic model(called formal methods in some research works). The security result of a protocol in
@@ -77,6 +90,9 @@ Detailed survey of symbolic model based security analysis approaches can be
 referred from \cite{symbolic-survey}.
 
 \subsection{Computational Model based Security Analysis}
+The security
+results acquired with computational model based analysis represent attack situations in real world. The weakness of computational model includes manually evaluation in most cases and error-prone. 
+
 \subsubsection{Security Notion of MAC Schemes in Computational Model}
 From the viewpoint of computational model, the security of a MAC scheme can be
 broken if the resources, such as computation time, is unlimited for the
@@ -89,7 +105,13 @@ The purpose of a message authentication system is preventing the receiver to acc
 A strong type of attack that an adversary can conduct on the message authentication system is the adaptive chosen-message attack, marked as uf-cma. When doing uf-cma, the adversary chooses its own input message M and acquires the relative tag T. The adversary try to find the weakness in the design of message authentication system by analyzing the pairs(M,T) of his choice. The uf-cma provides the adversary with the most capability to succeed in the forgery attack. The probability that an adversary conducts a successful forgery attack after limited times of uf-cma is adopted as the basic quantitative security property of a message authentication in cryptography. This fact was also mentioned in \cite{Rogaway2011}.
 \paragraph{The Security Notions of MAC schemes}
 The formalised quantitative notion of the security of a MAC scheme was introduced by Bellare et al. in \cite{cbc1994}. This notion follows the security notion of digital signature introduced in \cite{signature}. The successful forgery on a MAC scheme from an adversary A is measured by a experiment called Forgery(MAC,A). In Forgery(MAC,A),  
-the adversary A is provided a black-box access to the tag generation system TG$_K$(). When TG$_K$() takes an input message M$_i$, it returns tag T$_i$ to A. A conducts uf-cma by keep sending the message queries M$_i$ and observes the relative tag T$_i$ for limited times. On the other hand, A is provided a black-box access to the verification system VF$_K$(). When A sends a pair(M$_j$,T$_j$) to VF$_K$(), the VF$_K$() computes the tag T of M$_j$ and compares T with T$_j$. If T=T$_j$ then VF$_K$()=1 otherwise 0. If A sends a pair(M,T) that makes VF$_K$() outputs 1 while M has not appeared in the previous queries of uf-cma, then A succeeds a forgery attack and Forgery(MAC,A)=1.
+the adversary A is provided a black-box access to the tag generation system
+TG(M, $\ldots$). When TG(M, $\ldots$) takes an input message M$_i$, it returns
+tag T$_i$ to A. A conducts uf-cma by keep sending the message queries M$_i$ and
+observes the relative tag T$_i$ for limited times. On the other hand, A is
+provided a black-box access to the verification system VF$_K$(). When A sends a
+pair(M$_j$,T$_j$) to VF, then VF computes the tag
+T of M$_j$ and compares T with T$_j$. If T=T$_j$ then VF outputs 1 otherwise 0. If A sends a pair(M,T) that makes VF outputs 1 while M has not appeared in the previous queries of uf-cma, then A succeeds a forgery attack and Forgery(MAC,A)=1.
 
 The quantitative security notion of a MAC scheme is forgery probability, expressed as Forgery$_{MAC}$=Pr[Forgery(MAC,A)=1].
 \paragraph{The Correlation between Security and Randomness}
