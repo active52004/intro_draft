@@ -4,6 +4,8 @@
 \usepackage{amsmath}
 \begin{document}
 \section{Introduction}
+
+%the problem: is CETD a secure memory protection scheme?
 \subsection{Motivation: CETD use new designed component, the formal security
 analysis is not provided with the design}
 Message authentication code(MAC) is a cryptographic system to protect the integrity of message transmitted between sender and receiver. If the content of message blocks are modified or external message blocks are injected, a secure MAC scheme should be eligible to examine the attacks. When using a MAC scheme to protect the integrity, message blocks are adopted to a MAC scheme as input and a short message block, called tag in majority of research works, is generated as output. The tag is concatenated to the input message blocks and this data-tag pair is used as unit in transmission. Early MAC schemes are symmetric-keyed, stateless(secrete key is the only resource of randomness in tag generation) and constructed with block cipher. As stateless MAC schemes suffer from replay attacks, MAC schemes using state information of message blocks protected as additional information in tag generation have been designed.
@@ -17,10 +19,16 @@ A security analysis of the MAC scheme adopted was provided by Hong et al. indica
 	\item The evaluation procedure does not belong to any common formal evaluation framework. The security result provided can not be used in comparison with the formal results from evaluation of other MAC schemes.
 \end{itemize}
 The tag design from Hong et al. showed  reduction of on-chip, performance and memory overhead. This cost advantage attracted us to research its security with a formal approach.
-\subsection{Approach: Analysis the security of CETD with computational model}
-In this article, we will show that from the viewpoint of computational model based security analysis, the secure block cipher used in generating nonce can not ensure the security of Cost-Effective Tag Design as a message authentication system under several attacks. To make this statement meaningful, we follow the well recognized security notions of message authentication system in computational model.
-\subsection{Results: found security weakness, security optimization and results for optimized design }
 
+%our analysis and results: cetd meet the requirement of cetd-mac; CETD-MAC is not secure.
+\subsection{Analysis and Results:CETD is not secure as CETD-MAC is not a secure MAC}
+In this article, we will show that from the viewpoint of computational model based security analysis, the secure block cipher used in generating nonce can not ensure the security of Cost-Effective Tag Design as a message authentication system under several attacks. To make this statement meaningful, we follow the well recognized security notions of message authentication system in computational model.
+%approach: enhance cetd-mac security; new design based on cetd-mac
+\subsection{Approach: New Designs based on CETD-MAC}
+%future work: the compoents from cetd-mac is necessary?
+\subsection{Subsequent works:The balance between security and cost/performance}
+
+%the history of security analysis on MAC schemes
 \section{Preliminary: Formal Approaches of Security Analysis}
 Since 1980s, two formal approaches have been developed for analyzing the
 security protocols. "Formal" means the security notions for a type of protocols
@@ -181,6 +189,7 @@ approach and code-based game-playing proofs can not be applied. We adopt the
 security notion of MAC schemes in computational model to do manually analysis.
 
 \section{Related Works} 
+In this part we introduce some previous works on design and security analysis on MAC schemes. The articles about the application of MAC scheme in memory protection will also be introduced.
 \subsection{MAC Schemes and Security Analysis}
 %stateless and stateful
 \paragraph{Stateless and Stateful MAC schemes}
